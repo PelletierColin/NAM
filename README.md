@@ -2,4 +2,4 @@
 > Numeric Assets Management
 
 ## Installation
-Read the installation process -> [here]()
+Read the installation process -> [here](INSTALLATION.md)
