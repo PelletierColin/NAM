@@ -10,9 +10,9 @@ When you're done with the ruby installation, go on.
 sudo apt install git
 ```
 
-MySQL client
+MySQL client & Nginx
 ```shell
-sudo apt install default-libmysqlclient-dev
+sudo apt install default-libmysqlclient-dev nginx
 ```
 
 NodeJS is required for assets compilation:
