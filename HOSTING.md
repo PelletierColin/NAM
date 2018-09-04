@@ -9,3 +9,7 @@ When you're done with the ruby installation, go on.
 ```shell
 apt install git
 ```
+
+#### Github setup
+Add your hosting server public SSH key to your [Github account](https://github.com/settings/keys).
+During the deployment process the server will pull code directory from Github.
