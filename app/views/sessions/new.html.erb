@@ -11,8 +11,17 @@
             <header class="login-pf-header">
               <h1>Log In to Your Account</h1>
             </header>
+            <% flash.each do |key, value| %>
+            <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
+              <p>
+                <%= value %>
+              </p>
+            </div>
+            <% end %>
             <%= render 'form_new' %>
-            <p class="login-pf-signup">Need an account?<a href="#">Sign up</a></p>
+            <p class="login-pf-signup">Need an account?
+              <%= link_to 'Sign up', new_user_path %>
+            </p>
           </div><!-- card -->
           <footer class="login-pf-page-footer">
             <ul class="login-pf-page-footer-links list-unstyled">
