@@ -1,0 +1,55 @@
+<%= form_for(@user,:html => {:class => 'form-horizontal'}) do |f| %>
+<% if f.object.errors.any? %>
+<div class="form-group">
+  <div class="alert alert-danger" role="alert">
+    <div id="clear"></div>
+    <div id="error">
+      <p class="title">
+        <%= t 'activemodel.errors.messages', count: f.object.errors.count %>
+      </p>
+      <ul>
+        <% f.object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div id="clear"></div>
+  </div>
+</div>
+<% end %>
+<div class="form-group">
+  <%= label_tag 'firstname', "Firstname", class: 'col-sm-2 col-md-2 control-label' %>
+  <div class="col-sm-10 col-md-10">
+    <%= f.text_field :firstname, class: 'form-control'%>
+  </div>
+</div>
+<div class="form-group">
+  <%= label_tag 'lastname', "Lastname", class: 'col-sm-2 col-md-2 control-label' %>
+  <div class="col-sm-10 col-md-10">
+    <%= f.text_field :lastname, class: 'form-control'%>
+  </div>
+</div>
+<div class="form-group">
+  <%= label_tag 'mail', "Email", class: 'col-sm-2 col-md-2 control-label' %>
+  <div class="col-sm-10 col-md-10">
+    <%= f.email_field :mail, class: 'form-control'%>
+  </div>
+</div>
+<div class="form-group">
+  <%= label_tag 'password', "Password", class: 'col-sm-2 col-md-2 control-label'  %>
+  <div class="col-sm-10 col-md-10">
+    <%= f.password_field :password, class: 'form-control'%>
+  </div>
+</div>
+<div class="form-group">
+  <%= label_tag 'password', "Password confirmation", class: 'col-sm-2 col-md-2 control-label'  %>
+  <div class="col-sm-10 col-md-10">
+    <%= f.password_field :password_confirmation, class: 'form-control'%>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-12">
+    <button type="submit" class="btn btn-primary btn-block btn-lg">Register</button>
+  </div>
+</div>
+<% end %>

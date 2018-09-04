@@ -1,0 +1,71 @@
+<nav class="navbar navbar-default navbar-pf" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">
+      <%= image_tag("ISSKA_logo", width: "120", alt: "NAM") %>
+      <span class="navbar-brand-name" style="font-size: 22px; vertical-align: middle;">Numeric Assets Management</span>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse navbar-collapse-1">
+    <ul class="nav navbar-nav navbar-utility">
+      <li class="dropdown">
+        <button class="btn btn-link nav-item-iconic" id="helpDropDownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span title="Help" class="fa pficon-help dropdown-title"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="helpDropDownMenu">
+          <li><a href="#0">Help</a></li>
+          <li><a href="#0">About</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <% currently_logged = current_logged_user %>
+        <% if currently_logged %>
+        <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+          <span class="pficon pficon-user"></span>
+          <span class="dropdown-title">
+            <%= currently_logged.firstname.capitalize %>
+            <%= currently_logged.lastname.capitalize %>
+            <b class="caret"></b>
+          </span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#0">Settings</a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <%= link_to 'Log out', logout_path, method: :delete %>
+          </li>
+        </ul>
+        <% else %>
+        <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+          <span class="pficon pficon-user"></span>
+          <span class="dropdown-title">
+            Account
+            <b class="caret"></b>
+          </span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <%= link_to 'Log in', login_path %>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <%= link_to 'Register', new_user_path %>
+          </li>
+        </ul>
+        <% end %>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-primary">
+      <li>
+        <%= link_to 'Home', root_path %>
+      </li>
+    </ul>
+  </div>
+</nav>

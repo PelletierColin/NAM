@@ -1,0 +1,38 @@
+<div class="modal fade" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="about_modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content about-modal-pf">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <span class="pficon pficon-close"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h1>Numeric Assets Management</h1>
+        <div class="product-versions-pf">
+          <ul class="list-unstyled">
+            <li>
+              <strong>
+                <%= link_to "Clément Hampaï", "https://github.com/CypressXt", :target => "_blank", :style => "color:#FFF;"%>
+              </strong></br>
+              <p class="text-right">
+              v.<small>
+                <% if get_revision.to_s != "unknown 😳" %>
+                <%= link_to get_revision(7), 'https://github.com/ISSKA/NAM/commit/'+get_revision, target: :_blank %>
+                <% else %>
+                <%= get_revision %>
+                <% end %>
+              </small>
+              <p>
+            </li>
+          </ul>
+        </div>
+        <div class="trademark-pf">
+          Swiss Institute of Speleology and Karstology
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= image_tag("ISSKA_logo", width: "64") %>
+      </div>
+    </div>
+  </div>
+</div>

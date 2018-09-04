@@ -1,0 +1,14 @@
+<%= form_for(:session, url: login_path,:html => {:class => 'form-horizontal'}) do |f| %>
+<div class="form-group">
+  <%= label_tag 'mail', "Email", class: 'sr-only' %>
+  <%= f.email_field :mail, class: 'form-control input-lg', id: "inputMail", placeholder: "Email address" %>
+</div>
+<div class="form-group">
+  <%= label_tag 'password', "Password", class: 'sr-only'  %>
+  <%= f.password_field :password, class: 'form-control input-lg', id: "inputPassword", placeholder: "Password"%>
+</div>
+<div class="form-group login-pf-settings">
+  <a href="#">Forgot password?</a>
+</div>
+<button type="submit" class="btn btn-primary btn-block btn-lg">Log In</button>
+<% end %>

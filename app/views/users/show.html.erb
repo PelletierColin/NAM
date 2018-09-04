@@ -1,0 +1,17 @@
+<section class="mt-4">
+  <div class="text-center">
+    <% flash.each do |key, value| %>
+    <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
+      <p>
+        <%= value %>
+      </p>
+    </div>
+    <% end %>
+    <h1>Hi <%= current_logged_user.firstname.capitalize %></h1>
+    <div class=" text-center">
+      <p class="mb-0"><%= current_logged_user.firstname.capitalize %> <%= current_logged_user.lastname.capitalize %></p>
+      <span class="badge badge-secondary"><%= current_logged_user.mail %></span>
+    </div>
+    <%= link_to "Edit my profil", edit_user_path(current_logged_user.id), class: "btn btn-sx btn-primary" %>
+  </div>
+</section>

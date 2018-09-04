@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us" class="layout-pf layout-pf-fixed">
   <head>
     <title>NAM</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-
-  <body>
-    <%= yield %>
+  <body class="cards-pf">
+    <%= render 'top_menu' %>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+    <%= render 'about_modal' %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </body>
 </html>
