@@ -1,5 +1,5 @@
 upstream isska-nam {
-  server unix:///var/www/ISSKA/NAM/tmp/sockets/puma.sock fail_timeout=0;
+  server unix:///var/www/ISSKA/NAM/shared/tmp/sockets/puma.sock fail_timeout=0;
 }
 
 server {
