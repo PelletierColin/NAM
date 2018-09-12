@@ -58,3 +58,17 @@ preproduction:
   secret_key_base: 73519f91ee27dc3c6dbaf4a662ee4a38c2fdf5e09c614abd75d6343f3002966f2e184b91aef25a61d177031e40d6828baebbcbb18132fac4585acac83e2e8a37
   my_super_secret: neverGonnaGiveYouUp
 ```
+
+### Puma Setup
+
+Create the following folder required by puma:
+```shell
+mkdir -p /var/www/ISSKA/NAM/shared/tmp/{sockets,pids}
+mkdir -p /var/www/ISSKA/NAM/shared/log/
+```
+
+You can find the Puma configuration file here [puma.rb](config/puma.rb)
+
+### Nginx Setup
+
+You can find the Nginx configuration file here [nam.nginx.conf](config/dev.nam.isska.ch.nginx)
