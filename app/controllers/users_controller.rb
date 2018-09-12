@@ -42,6 +42,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def delete
+  end
+
+  def destroy
+    @user = current_logged_user
+    if @user.destroy && log_out
+      flash[:success] = "Account successfully deleted."
+      redirect_to root_path
+    else
+      flash[:danger] =  "Failed to delete your account, "+@user.errors.full_messages.to_sentence
+      redirect_to user_delete_path(@user.id)
+    end
+  end
+
   def must_be_proprietary
     @user = User.find_by(id: params[:user_id]) || User.find_by(id: params[:id])
     if @user != current_logged_user

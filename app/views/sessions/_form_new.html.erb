@@ -1,5 +1,14 @@
 <%= form_for(:session, url: login_path,:html => {:class => 'form-horizontal'}) do |f| %>
 <div class="form-group">
+  <% flash.each do |key, value| %>
+  <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
+    <p>
+      <%= value %>
+    </p>
+  </div>
+  <% end %>
+</div>
+<div class="form-group">
   <%= label_tag 'mail', "Email", class: 'sr-only' %>
   <%= f.email_field :mail, class: 'form-control input-lg', id: "inputMail", placeholder: "Email address" %>
 </div>

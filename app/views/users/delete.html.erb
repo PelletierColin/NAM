@@ -1,0 +1,11 @@
+<div class="card-pf">
+  <h1><%= current_logged_user.firstname.capitalize %>, your account will be deleted forever, are you sure you want to delete it ?</h1>
+  <% flash.each do |key, value| %>
+  <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
+    <p>
+      <%= value %>
+    </p>
+  </div>
+  <% end %>
+  <%= link_to "Yes, delete my account.", user_path(current_logged_user.id), :method => :delete, :class => "btn btn-danger btn-lg" %>
+</div>

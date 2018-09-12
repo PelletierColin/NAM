@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root  'static#index'
 
   ## Users
-  resources :users
+  resources :users do
+    get 'delete'                          => 'users#delete'
+  end
   # -------------
 
   ## Sessions
