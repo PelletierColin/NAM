@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   end
   # -------------
 
+  ## Assets
+  # "assets" is a reserved root used by rails to serve img,css,...
+  resources :assets, path: :items
+
   ## Sessions
   get     'login'                          => 'sessions#new'
   post    'login'                          => 'sessions#create'

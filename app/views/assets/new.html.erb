@@ -1,0 +1,13 @@
+<div class="card-pf">
+  <header class="login-pf-header">
+    <h1>New asset</h1>
+  </header>
+  <% flash.each do |key, value| %>
+  <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
+    <p>
+      <%= value %>
+    </p>
+  </div>
+  <% end %>
+  <%= render 'form_new' %>
+</div>

@@ -14,13 +14,7 @@
   <div class="collapse navbar-collapse navbar-collapse-1">
     <ul class="nav navbar-nav navbar-utility">
       <li class="dropdown">
-        <button class="btn btn-link nav-item-iconic" id="helpDropDownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <span title="Help" class="fa pficon-help dropdown-title"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="helpDropDownMenu">
-          <li><a href="#0">Help</a></li>
-          <li><a href="#0">About</a></li>
-        </ul>
+        <button class="btn btn-link nav-item-iconic fa pficon-help" data-toggle="modal" data-target="#about-modal"></button>
       </li>
       <li class="dropdown">
         <% currently_logged = current_logged_user %>
@@ -64,6 +58,20 @@
     <ul class="nav navbar-nav navbar-primary">
       <li>
         <%= link_to 'Home', root_path %>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          Assets
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <%= link_to 'List', assets_path %>
+          </li>
+          <li>
+            <%= link_to 'New asset', new_asset_path %>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
