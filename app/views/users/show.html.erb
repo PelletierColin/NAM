@@ -1,4 +1,4 @@
-<section class="mt-4">
+<div class="card-pf">
   <div class="text-center">
     <% flash.each do |key, value| %>
     <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
@@ -14,4 +14,4 @@
     </div>
     <%= link_to "Edit my profil", edit_user_path(current_logged_user.id), class: "btn btn-sx btn-primary" %>
   </div>
-</section>
+</div>
