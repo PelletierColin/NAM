@@ -1,0 +1,18 @@
+<table class="table table-striped table-bordered table-hover" id="assettypes_table">
+  <thead>
+    <tr>
+      <th>Asset type</th>
+      <th>Description</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <% @asset_types.each do |asset_type| %>
+  <tr>
+    <td><%= asset_type.name %></td>
+    <td><%= asset_type.description %></td>
+    <td colspan="2">
+      <%= link_to 'show', asset_type_path(asset_type), class: "btn btn-primary btn-xs" %>
+    </td>
+  </tr>
+  <% end %>
+</table>

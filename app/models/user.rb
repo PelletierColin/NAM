@@ -11,6 +11,7 @@ class User < ApplicationRecord
   before_save :set_lowercase
   # -----
 
+  has_many :assets
 
   def set_lowercase
     self.firstname = self.firstname.downcase

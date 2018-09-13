@@ -1,8 +1,8 @@
 <table class="table table-striped table-bordered table-hover" id="assets_table">
   <thead>
     <tr>
-      <th>Product type</th>
-      <th>Product serial</th>
+      <th>Asset type</th>
+      <th>Asset serial</th>
       <th>Description</th>
       <th>Date of purchase</th>
       <th>Battery life</th>
@@ -13,7 +13,7 @@
   </thead>
   <% @assets.each do |asset| %>
   <tr>
-    <td>product type</td>
+    <td><%= asset.asset_type.name %></td>
     <td><%= asset.product_serial %></td>
     <td><%= asset.description %></td>
     <td><%= asset.date_purchase.strftime("%d-%m-%Y") %></td>

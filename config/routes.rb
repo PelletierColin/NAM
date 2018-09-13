@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   # "assets" is a reserved root used by rails to serve img,css,...
   resources :assets, path: :items
 
+  ## Asset types
+  resources :asset_types, path: :item_types
+
   ## Sessions
   get     'login'                          => 'sessions#new'
   post    'login'                          => 'sessions#create'
