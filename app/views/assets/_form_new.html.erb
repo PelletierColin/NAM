@@ -29,7 +29,7 @@
     <% if @asset_types %>
     <%= select_tag "asset_type", options_from_collection_for_select(@asset_types, "id", "name"), class: "form-control" %>
     <% else %>
-
+      <%= link_to "You need to create an asset type first...", new_asset_type_path, class: "btn btn-lg btn-link" %>
     <% end %>
   </div>
 </div>
