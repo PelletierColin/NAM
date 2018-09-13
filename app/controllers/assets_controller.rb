@@ -1,7 +1,7 @@
 class AssetsController < ApplicationController
-  before_action :must_be_logged, only:   [:new, :create]
+  before_action :must_be_logged, only: [:new, :create]
   before_action :get_asset_type, only: [:create]
-  before_action :get_asset, only: [:show, :update]
+  before_action :get_asset,      only: [:show, :update]
 
   def index
     @assets = Asset.all
@@ -19,7 +19,7 @@ class AssetsController < ApplicationController
     if @asset.save
       redirect_to assets_path(@asset.id)
     else
-      flash.now[:danger] =  "Failed to create "+@asset.product_serial
+      flash.now[:danger] =  "Failed to create "+@asset.product_serial.upcase
       render 'new'
     end
   end
