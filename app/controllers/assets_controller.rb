@@ -1,6 +1,7 @@
 class AssetsController < ApplicationController
   before_action :must_be_logged, only:   [:new, :create]
   before_action :get_asset_type, only: [:create]
+  before_action :get_asset, only: [:show, :update]
 
   def index
     @assets = Asset.all
@@ -21,6 +22,24 @@ class AssetsController < ApplicationController
       flash.now[:danger] =  "Failed to create "+@asset.product_serial
       render 'new'
     end
+  end
+
+  def show
+    @asset_types = AssetType.all
+  end
+
+  def update
+    if @asset.update(asset_params)
+      flash[:success] = "Asset successfully updated."
+      redirect_to asset_path(@asset)
+    else
+      flash[:danger] =  "Failed to update "+@asset.product_serial.upcase
+      redirect_to asset_path(@asset)
+    end
+  end
+
+  def get_asset
+    @asset = Asset.find_by(id: params["id"])
   end
 
   def get_asset_type

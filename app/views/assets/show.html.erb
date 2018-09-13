@@ -1,0 +1,36 @@
+<div class="card-pf">
+  <div class="login-pf-header">
+    <h1><%= @asset.product_serial.upcase %></h1>
+  </div>
+  <% flash.each do |key, value| %>
+  <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
+    <p>
+      <%= value %>
+    </p>
+  </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= render 'form_new' %>
+    </div>
+    <div class="col-md-6">
+      <h2>Missions</h2>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Mission</th>
+            <th>Localisation</th>
+            <th>description</th>
+            <th>date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
