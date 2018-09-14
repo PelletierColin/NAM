@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   ## Asset types
   resources :asset_types, path: :item_types
 
+  ## Missions
+  resources :missions
+
   ## Sessions
   get     'login'                          => 'sessions#new'
   post    'login'                          => 'sessions#create'

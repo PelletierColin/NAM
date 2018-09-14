@@ -1,0 +1,24 @@
+<table class="table table-striped table-bordered table-hover" id="missions_table">
+  <thead>
+    <tr>
+      <th>Project name</th>
+      <th>Description</th>
+      <th>Starting date</th>
+      <th>Ending date</th>
+      <th>Owner</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <% @missions.each do |mission| %>
+  <tr>
+    <td><%= mission.project_name %></td>
+    <td><%= mission.description %></td>
+    <td><%= mission.starting_date.strftime("%d-%m-%Y") %></td>
+    <td><%= mission.ending_date.strftime("%d-%m-%Y") %></td>
+    <th><%= mission.user.firstname.capitalize %></th>
+    <td colspan="2">
+      <%= link_to 'show', mission_path(mission), class: "btn btn-primary btn-xs" %>
+    </td>
+  </tr>
+  <% end %>
+</table>

@@ -1,4 +1,5 @@
 class AssetTypesController < ApplicationController
+  before_action :must_be_logged, only: [:new, :create, :update]
   before_action :get_asset_type, only: [:show, :update]
 
   def index

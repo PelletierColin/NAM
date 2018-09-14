@@ -1,5 +1,5 @@
 class AssetsController < ApplicationController
-  before_action :must_be_logged, only: [:new, :create]
+  before_action :must_be_logged, only: [:new, :create, :update]
   before_action :get_asset_type, only: [:create]
   before_action :get_asset,      only: [:show, :update]
 
