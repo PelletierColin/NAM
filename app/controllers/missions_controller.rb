@@ -28,10 +28,10 @@ class MissionsController < ApplicationController
   def update
     if @mission.update(mission_params)
       flash[:success] = "Mission successfully updated."
-      redirect_to asset_path(@mission)
+      redirect_to mission_path(@mission)
     else
       flash[:danger] =  "Failed to update "+@mission.project_name
-      redirect_to asset_path(@mission)
+      redirect_to mission_path(@mission)
     end
   end
 
