@@ -26,6 +26,7 @@ class AssetsController < ApplicationController
 
   def show
     @asset_types = AssetType.all
+    @missions = []
   end
 
   def update
