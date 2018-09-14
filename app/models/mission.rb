@@ -4,6 +4,8 @@ class Mission < ApplicationRecord
   validate :starting_ending_date_validation
 
   belongs_to :user
+  has_many :asset_missions
+  has_many :assets, through: :asset_missions
 
   def starting_ending_date_validation
     if starting_date > ending_date

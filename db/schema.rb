@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180914122657) do
+ActiveRecord::Schema.define(version: 20180914145718) do
+
+  create_table "asset_missions", force: :cascade do |t|
+    t.time "measurement_interval"
+    t.time "measurement_duration"
+    t.text "placement_indications"
+    t.boolean "battery_replaced"
+    t.integer "user_id"
+    t.integer "mission_id"
+    t.integer "asset_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_asset_missions_on_asset_id"
+    t.index ["mission_id"], name: "index_asset_missions_on_mission_id"
+    t.index ["user_id"], name: "index_asset_missions_on_user_id"
+  end
 
   create_table "asset_types", force: :cascade do |t|
     t.string "name"

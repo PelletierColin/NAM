@@ -12,6 +12,8 @@ class User < ApplicationRecord
   # -----
 
   has_many :assets
+  has_many :asset_missions
+  has_many :missions
 
   def set_lowercase
     self.firstname = self.firstname.downcase
