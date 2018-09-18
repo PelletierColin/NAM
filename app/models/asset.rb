@@ -7,4 +7,17 @@ class Asset < ApplicationRecord
   has_many :asset_missions
   has_many :missions, through: :asset_missions
 
+
+  ## Return remaining battery hours at NOW
+  def get_battery_status
+    battery_tlived = (DateTime.now.to_i - date_purchase.to_i) / 3600
+    battery_state = battery_life - battery_tlived
+    return battery_state
+  end
+
+  ## Return remaining battery % at NOW
+  def get_battery_status_pct
+    return get_battery_status * 100 / battery_life
+  end
+
 end

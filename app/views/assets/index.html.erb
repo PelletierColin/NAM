@@ -19,16 +19,25 @@
     <td><%= asset.date_purchase.strftime("%d-%m-%Y") %></td>
     <td>
       <% if asset.battery_life %>
-      <%= asset.battery_life %>h (<%= asset.battery_life / 24 %> days || <%= asset.battery_life / 24/365 %> years)
+      <%= asset.battery_life %> h (<%= asset.battery_life / 24 %> days)
       <% else %>
       -
       <% end %>
     </td>
     <td>
-      <% if asset.battery_life %>
+      <% if asset.battery_life
+        pg_class = "progress-bar-success"
+        if asset.get_battery_status_pct < 15
+          pg_class = "progress-bar-danger"
+        elsif asset.get_battery_status_pct < 30
+          pg_class = "progress-bar-warning"
+        elsif asset.get_battery_status_pct < 60
+          pg_class = "progress-bar-info"
+        end
+      %>
       <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-          <span>50%</span>
+        <div class="progress-bar <%= pg_class %>" role="progressbar" aria-valuenow="<%= asset.get_battery_status_pct %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= asset.get_battery_status_pct %>%;">
+          <span><%= asset.get_battery_status_pct %>%</span>
         </div>
       </div>
       <% else %>
