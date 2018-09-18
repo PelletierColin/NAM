@@ -19,14 +19,14 @@ class AssetsController < ApplicationController
     if @asset.save
       redirect_to assets_path(@asset.id)
     else
-      flash.now[:danger] =  "Failed to create "+@asset.product_serial.upcase
-      render 'new'
+      flash[:danger] =  "Failed to create "+@asset.product_serial.upcase
+      redirect_to new_asset_path
     end
   end
 
   def show
     @asset_types = AssetType.all
-    @missions = []
+    @missions = @asset.missions
   end
 
   def update
@@ -48,7 +48,7 @@ class AssetsController < ApplicationController
   end
 
   def asset_params
-    params.require(:asset).permit(:product_serial, :description, :battery_life, :date_purchase, :asset_type)
+    params.require(:asset).permit(:product_serial, :description, :battery_life, :date_purchase, :asset_type_id, :user_id)
   end
 
 end

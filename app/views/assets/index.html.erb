@@ -19,7 +19,7 @@
     <td><%= asset.date_purchase.strftime("%d-%m-%Y") %></td>
     <td>
       <% if asset.battery_life %>
-      <%= asset.battery_life.hour %>h
+      <%= asset.battery_life %>h (<%= asset.battery_life / 24 %> days || <%= asset.battery_life / 24/365 %> years)
       <% else %>
       -
       <% end %>

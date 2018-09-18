@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180914145718) do
+ActiveRecord::Schema.define(version: 20180918094119) do
 
   create_table "asset_missions", force: :cascade do |t|
-    t.time "measurement_interval"
-    t.time "measurement_duration"
+    t.integer "measurement_interval"
+    t.integer "measurement_duration"
     t.text "placement_indications"
     t.boolean "battery_replaced"
     t.integer "user_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20180914145718) do
   create_table "assets", force: :cascade do |t|
     t.text "description"
     t.text "product_serial"
-    t.time "battery_life"
+    t.integer "battery_life"
     t.integer "user_id"
     t.datetime "date_purchase"
     t.datetime "created_at", null: false

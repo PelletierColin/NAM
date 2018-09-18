@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   ## Missions
   resources :missions
 
+  ## Assets Missions
+  resources :assets_missions
+
   ## Sessions
   get     'login'                          => 'sessions#new'
   post    'login'                          => 'sessions#create'

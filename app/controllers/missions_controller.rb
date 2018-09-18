@@ -22,7 +22,7 @@ class MissionsController < ApplicationController
   end
 
   def show
-    @assets = []
+    @assets = @mission.assets
   end
 
   def update
