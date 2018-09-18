@@ -41,7 +41,7 @@
   <div class="row">
     <label class="col-sm-2 col-md-2">Date of purchase</label>
     <div class="col-sm-10 col-md-10">
-      <%= @asset.date_purchase %>
+      <%= @asset.date_purchase.strftime("%d-%m-%Y") %>
     </div>
   </div>
 </div>
