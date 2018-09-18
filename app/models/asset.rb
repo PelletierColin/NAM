@@ -12,12 +12,19 @@ class Asset < ApplicationRecord
   def get_battery_status
     battery_tlived = (DateTime.now.to_i - date_purchase.to_i) / 3600
     battery_state = battery_life - battery_tlived
-    return battery_state
+    if battery_state < 0
+      battery_state = 0
+    end
+    return battery_state.to_i
   end
 
   ## Return remaining battery % at NOW
   def get_battery_status_pct
-    return get_battery_status * 100 / battery_life
+    battery_state = get_battery_status * 100 / battery_life
+    if battery_state < 0
+      battery_state = 0
+    end
+    return battery_state
   end
 
 end

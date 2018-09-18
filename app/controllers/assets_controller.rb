@@ -19,7 +19,7 @@ class AssetsController < ApplicationController
     if @asset.save
       redirect_to assets_path(@asset.id)
     else
-      flash[:danger] =  "Failed to create "+@asset.product_serial.upcase
+      flash[:danger] =  "Failed to create "+@asset.product_serial.upcase+"."+@asset.errors.full_messages.to_sentence
       redirect_to new_asset_path
     end
   end
@@ -44,7 +44,7 @@ class AssetsController < ApplicationController
   end
 
   def get_asset_type
-    @asset_type = AssetType.find_by(id: params["asset_type"])
+    @asset_type = AssetType.find_by(id: asset_params["asset_type_id"])
   end
 
   def asset_params
