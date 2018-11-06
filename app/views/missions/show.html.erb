@@ -19,6 +19,13 @@
     </div>
     <div class="col-md-6">
       <h2>Assets</h2>
+      <% if is_logged_in %>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= link_to 'bring assets for this mission', mission_prepare_assets_path(@mission) , class: "btn btn-default" %>
+        </div>
+      </div>
+      <% end %>
       <%= render :template => 'assets/index' %>
     </div>
   </div>

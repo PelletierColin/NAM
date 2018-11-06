@@ -1,6 +1,6 @@
 class MissionsController < ApplicationController
-  before_action :must_be_logged,   only: [:new, :create, :update]
-  before_action :get_mission,      only: [:show, :update]
+  before_action :must_be_logged,   only: [:new, :create, :update, :prepare_assets, :add_assets]
+  before_action :get_mission,      only: [:show, :update, :prepare_assets, :add_assets]
 
   def index
     @missions = Mission.all
@@ -35,8 +35,35 @@ class MissionsController < ApplicationController
     end
   end
 
+  def prepare_assets
+    @assets = Asset.joins(:missions).where('missions.ending_date < ?', DateTime.now)
+    @assets += Asset.left_outer_joins(:asset_missions).where( asset_missions: { id: nil } )
+    @assets = @assets.uniq
+  end
+
+  def add_assets
+    if params && params.key?("assets_id")
+      params["assets_id"].each do |asset_id|
+        asset_mission = AssetMission.new()
+        asset_mission.mission = @mission
+        asset_mission.asset = Asset.find_by(id: asset_id)
+        asset_mission.user = current_logged_user
+        if !asset_mission.save
+          flash[:danger] = "Error when trying to assign the \""+asset_mission.asset.product_serial+" "+asset_mission.asset.description+"\" to this mission. "+asset_mission.errors.full_messages.to_sentence
+          break
+        end
+      end
+    else
+      flash[:warning] = "Select an asset related to this mission."
+    end
+    redirect_to mission_prepare_assets_path(@mission)
+  end
+
   def get_mission
-    @mission = Mission.find_by(id: params["id"])
+    @mission = Mission.find_by(id: params["id"]) || Mission.find_by(id: params["mission_id"])
+    if !@mission
+      render_404
+    end
   end
 
   def mission_params

@@ -17,7 +17,10 @@ Rails.application.routes.draw do
   resources :asset_types, path: :item_types
 
   ## Missions
-  resources :missions
+  resources :missions do
+    get 'prepare_assets' => 'missions#prepare_assets'
+    post 'add_assets'    => 'missions#add_assets'
+  end
 
   ## Assets Missions
   resources :assets_missions
