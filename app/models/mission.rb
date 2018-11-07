@@ -8,7 +8,7 @@ class Mission < ApplicationRecord
   has_many :assets, through: :asset_missions
 
   def starting_ending_date_validation
-    if starting_date > ending_date
+    if starting_date && ending_date && starting_date > ending_date
       errors.add(:base, "can't be anterior the starting date")
     end
   end
