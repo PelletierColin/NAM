@@ -36,7 +36,12 @@ class MissionsController < ApplicationController
   end
 
   def prepare_assets
-    @assets = Asset.joins(:missions).where('missions.ending_date < ?', DateTime.now)
+    @assets = []
+    Asset.all.each do |asset|
+      if Mission.joins(:assets).where('assets.id =  ?', asset.id).where('ending_date >= ?', DateTime.now).count == 0
+        @assets.push(asset)
+      end
+    end
     @assets += Asset.left_outer_joins(:asset_missions).where( asset_missions: { id: nil } )
     @assets = @assets.uniq
   end
