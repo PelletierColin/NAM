@@ -26,7 +26,7 @@ class AssetsController < ApplicationController
 
   def show
     @asset_types = AssetType.all
-    @missions = @asset.missions
+    @missions = @asset.missions.order('starting_date desc', 'ending_date desc')
   end
 
   def update

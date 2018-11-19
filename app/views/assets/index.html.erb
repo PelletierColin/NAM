@@ -1,53 +1,65 @@
-<table class="table table-striped table-bordered table-hover" id="assets_table">
-  <thead>
+<div class="card-pf">
+  <header class="login-pf-header">
+    <h1>Assets</h1>
+  </header>
+  <% flash.each do |key, value| %>
+  <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
+    <p>
+      <%= value %>
+    </p>
+  </div>
+  <% end %>
+  <table class="table table-striped table-bordered table-hover" id="assets_table">
+    <thead>
+      <tr>
+        <th>Asset type</th>
+        <th>Asset serial</th>
+        <th>Description</th>
+        <th>Date of purchase</th>
+        <th>Battery life</th>
+        <th>Battery %</th>
+        <th>Owner</th>
+        <th colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <% @assets.each do |asset| %>
     <tr>
-      <th>Asset type</th>
-      <th>Asset serial</th>
-      <th>Description</th>
-      <th>Date of purchase</th>
-      <th>Battery life</th>
-      <th>Battery %</th>
-      <th>Owner</th>
-      <th colspan="2">Actions</th>
-    </tr>
-  </thead>
-  <% @assets.each do |asset| %>
-  <tr>
-    <td><%= asset.asset_type.name %></td>
-    <td><%= asset.product_serial %></td>
-    <td><%= asset.description %></td>
-    <td><%= asset.date_purchase.strftime("%d-%m-%Y") %></td>
-    <td>
-      <% if asset.battery_life %>
-      <%= asset.battery_life %> h (<%= asset.battery_life / 24 %> days)
-      <% else %>
-      -
-      <% end %>
-    </td>
-    <td>
-      <% if asset.battery_life
+      <td><%= asset.asset_type.name %></td>
+      <td><%= asset.product_serial %></td>
+      <td><%= asset.description %></td>
+      <td><%= asset.date_purchase.strftime("%d-%m-%Y") %></td>
+      <td>
+        <% if asset.battery_life %>
+        <%= asset.battery_life %> h (<%= asset.battery_life / 24 %> days)
+        <% else %>
+        -
+        <% end %>
+      </td>
+      <td>
+        <% if asset.battery_life
         pg_class = "progress-bar-success"
         if asset.get_battery_status_pct < 15
-          pg_class = "progress-bar-danger"
+        pg_class = "progress-bar-danger"
         elsif asset.get_battery_status_pct < 30
-          pg_class = "progress-bar-warning"
+        pg_class = "progress-bar-warning"
         elsif asset.get_battery_status_pct < 60
-          pg_class = "progress-bar-info"
+        pg_class = "progress-bar-info"
         end
-      %>
-      <div class="progress">
-        <div class="progress-bar <%= pg_class %>" role="progressbar" aria-valuenow="<%= asset.get_battery_status_pct %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= asset.get_battery_status_pct %>%;">
-          <span><%= asset.get_battery_status_pct %>%</span>
+        %>
+        <div class="progress">
+          <div class="progress-bar <%= pg_class %>" role="progressbar" aria-valuenow="<%= asset.get_battery_status_pct %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= asset.get_battery_status_pct %>%;">
+            <span><%= asset.get_battery_status_pct %>%</span>
+          </div>
         </div>
-      </div>
-      <% else %>
-      -
-      <% end %>
-    </td>
-    <th><%= asset.user.firstname.capitalize %></th>
-    <td colspan="2">
-      <%= link_to 'show', asset_path(asset), class: "btn btn-primary btn-xs" %>
-    </td>
-  </tr>
-  <% end %>
-</table>
+        <% else %>
+        -
+        <% end %>
+      </td>
+      <th><%= asset.user.firstname.capitalize %></th>
+      <td colspan="2">
+        <%= link_to 'show', asset_path(asset), class: "btn btn-primary btn-xs" %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

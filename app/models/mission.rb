@@ -13,4 +13,15 @@ class Mission < ApplicationRecord
     end
   end
 
+  def get_current_assets
+    current_asset = []
+    self.asset_missions.each do |asset_mission|
+      asset = asset_mission.asset
+      if asset_mission.extracted_at == nil || asset_mission.extracted_at > DateTime.now
+        current_asset.push(asset)
+      end
+    end
+    return current_asset
+  end
+
 end

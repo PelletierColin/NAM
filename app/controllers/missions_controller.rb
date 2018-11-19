@@ -4,7 +4,7 @@ class MissionsController < ApplicationController
   before_action :get_asset_mission, only: [:extract_asset]
 
   def index
-    @missions = Mission.all.order('starting_date desc')
+    @missions = Mission.all.order('starting_date desc', 'ending_date desc')
   end
 
   def new
