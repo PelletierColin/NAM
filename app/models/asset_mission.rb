@@ -8,11 +8,11 @@ class AssetMission < ApplicationRecord
   belongs_to :user
 
   def one_asset_per_mission_at_a_time
-    if self.mission
-      if Mission.joins(:assets).where('assets.id =  ?', self.asset_id).where('ending_date >= ?', DateTime.now).count > 0
-        errors.add(:base, "An asset can only belongs to one mission at a time.")
+    if self.asset.has_current_mission && self.extracted_at_was != nil
+      self.asset.get_current_missions.each do |conflict_mission|
+        errors.add(:base, "Conflict with mission "+conflict_mission.description)
+        break
       end
     end
   end
-
 end

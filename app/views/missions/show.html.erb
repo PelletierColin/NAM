@@ -10,14 +10,14 @@
   </div>
   <% end %>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <% if is_logged_in %>
       <%= render 'form_new' %>
       <% else %>
       <%= render 'anon_show' %>
       <% end %>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
       <h2>Assets</h2>
       <% if is_logged_in %>
       <div class="panel panel-default">
@@ -26,7 +26,7 @@
         </div>
       </div>
       <% end %>
-      <%= render :template => 'assets/index' %>
+      <%= render 'assets_list' %>
     </div>
   </div>
   <div class="row">

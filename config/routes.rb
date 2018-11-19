@@ -18,12 +18,10 @@ Rails.application.routes.draw do
 
   ## Missions
   resources :missions do
-    get 'prepare_assets' => 'missions#prepare_assets'
-    post 'add_assets'    => 'missions#add_assets'
+    get 'prepare_assets'                      => 'missions#prepare_assets'
+    post 'add_assets'                         => 'missions#add_assets'
+    delete 'extract_asset/:mission_asset_id'  => 'missions#extract_asset', as: :extract_asset
   end
-
-  ## Assets Missions
-  resources :assets_missions
 
   ## Sessions
   get     'login'                          => 'sessions#new'

@@ -27,4 +27,24 @@ class Asset < ApplicationRecord
     return battery_state
   end
 
+  def has_current_mission
+    if get_current_missions.length > 0
+      return true
+    end
+    return false
+  end
+
+  def get_current_missions
+    current_mission = []
+    self.missions.each do |mission|
+      running_asset_missions = self.asset_missions.where(:mission => mission).where(:extracted_at => nil)
+      running_asset_missions += self.asset_missions.where(:mission => mission).where('extracted_at >= ?', DateTime.now)
+      if mission.ending_date > DateTime.now && running_asset_missions.count > 0
+        current_mission.push(mission)
+      end
+    end
+    current_mission.uniq
+    return current_mission
+  end
+
 end

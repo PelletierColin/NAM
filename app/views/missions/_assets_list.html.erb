@@ -1,0 +1,69 @@
+<table class="table table-striped table-bordered table-hover" id="assets_table">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Serial</th>
+      <th>Description</th>
+      <th>Purchase</th>
+      <th>Battery</th>
+      <th>Remaining Battery time</th>
+      <th>Placed on</th>
+      <th>Extracted on</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <% @asset_missions.each do |asset_mission| %>
+  <% asset = asset_mission.asset %>
+  <tr>
+    <td><%= asset.asset_type.name %></td>
+    <td><%= asset.product_serial %></td>
+    <td><%= asset.description %></td>
+    <td><%= asset.date_purchase.strftime("%m-%Y") %></td>
+    <td>
+      <% if asset.battery_life
+        pg_class = "progress-bar-success"
+        if asset.get_battery_status_pct < 15
+          pg_class = "progress-bar-danger"
+        elsif asset.get_battery_status_pct < 30
+          pg_class = "progress-bar-warning"
+        elsif asset.get_battery_status_pct < 60
+          pg_class = "progress-bar-info"
+        end
+      %>
+      <div class="progress">
+        <div class="progress-bar <%= pg_class %>" role="progressbar" aria-valuenow="<%= asset.get_battery_status_pct %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= asset.get_battery_status_pct %>%;">
+          <span><%= asset.get_battery_status_pct %>%</span>
+        </div>
+      </div>
+      <% else %>
+      -
+      <% end %>
+    </td>
+    <td>
+      <% if asset.battery_life %>
+      <%= asset.get_battery_status_pct*asset.battery_life/100 %>h (<%= asset.get_battery_status_pct*asset.battery_life/100 / 24 %> days)
+      <% else %>
+      -
+      <% end %>
+    </td>
+    <td><%= asset_mission.created_at.strftime("%d-%m-%Y") %></td>
+    <td>
+      <% if asset_mission.extracted_at %>
+      <%= asset_mission.extracted_at.strftime("%d-%m-%Y") %>
+      <% else %>
+      -
+      <% end %>
+    </td>
+    <td colspan="2">
+      <% disabled = "" %>
+      <% if asset_mission.extracted_at != nil %>
+        <% disabled = "disabled " %>
+      <% end %>
+      <%= link_to 'show', asset_path(asset), class: "btn btn-primary btn-xs" %>
+      <%= link_to 'upload data', asset_path(asset), class: "disabled btn btn-primary btn-xs" %>
+      <%= link_to 'battery replaced', asset_path(asset), class: "disabled btn btn-primary btn-xs" %>
+      <%= link_to 'extract asset', mission_extract_asset_path(asset_mission.mission, asset_mission), method: :delete,class: disabled+"btn btn-danger btn-xs" %>
+    </td>
+  </tr>
+  <% end %>
+</table>

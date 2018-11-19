@@ -1,9 +1,10 @@
 class MissionsController < ApplicationController
   before_action :must_be_logged,   only: [:new, :create, :update, :prepare_assets, :add_assets]
-  before_action :get_mission,      only: [:show, :update, :prepare_assets, :add_assets]
+  before_action :get_mission,      only: [:show, :update, :prepare_assets, :add_assets, :extract_asset]
+  before_action :get_asset_mission, only: [:extract_asset]
 
   def index
-    @missions = Mission.all
+    @missions = Mission.all.order('starting_date desc')
   end
 
   def new
@@ -22,7 +23,7 @@ class MissionsController < ApplicationController
   end
 
   def show
-    @assets = @mission.assets
+    @asset_missions = @mission.asset_missions.order('created_at desc')
   end
 
   def update
@@ -38,12 +39,10 @@ class MissionsController < ApplicationController
   def prepare_assets
     @assets = []
     Asset.all.each do |asset|
-      if Mission.joins(:assets).where('assets.id =  ?', asset.id).where('ending_date >= ?', DateTime.now).count == 0
+      if !asset.has_current_mission
         @assets.push(asset)
       end
     end
-    @assets += Asset.left_outer_joins(:asset_missions).where( asset_missions: { id: nil } )
-    @assets = @assets.uniq
   end
 
   def add_assets
@@ -64,9 +63,24 @@ class MissionsController < ApplicationController
     redirect_to mission_prepare_assets_path(@mission)
   end
 
+  def extract_asset
+    @asset_mission.extracted_at = DateTime.now
+    if !@asset_mission.save
+      flash[:danger] = "Error when trying to assign the \""+@asset_mission.errors.full_messages.to_sentence
+    end
+    redirect_to mission_path(@mission)
+  end
+
   def get_mission
     @mission = Mission.find_by(id: params["id"]) || Mission.find_by(id: params["mission_id"])
     if !@mission
+      render_404
+    end
+  end
+
+  def get_asset_mission
+    @asset_mission = AssetMission.find_by(id: params["mission_asset_id"])
+    if !@asset_mission || @asset_mission.mission != @mission
       render_404
     end
   end
