@@ -1,7 +1,7 @@
 class AssetsController < ApplicationController
-  before_action :must_be_logged, only: [:new, :create, :update]
+  before_action :must_be_logged, only: [:new, :create, :update, :replace_battery]
   before_action :get_asset_type, only: [:create]
-  before_action :get_asset,      only: [:show, :update]
+  before_action :get_asset,      only: [:show, :update, :replace_battery]
 
   def index
     @assets = Asset.all
@@ -26,6 +26,7 @@ class AssetsController < ApplicationController
 
   def show
     @asset_types = AssetType.all
+    @battery_replacements = @asset.battery_replacements.order('created_at desc').limit(10)
     @missions = @asset.missions.order('starting_date desc', 'ending_date desc')
   end
 
@@ -39,8 +40,22 @@ class AssetsController < ApplicationController
     end
   end
 
+  def replace_battery
+    @battery_replacement = BatteryReplacement.new(:asset=>@asset, :user=>current_logged_user)
+    if @battery_replacement.save
+      flash[:success] = "Battery changed successfully."
+      redirect_to asset_path(@asset)
+    else
+      flash[:danger] =  "Failed to change the battery"
+      redirect_to asset_path(@asset)
+    end
+  end
+
   def get_asset
-    @asset = Asset.find_by(id: params["id"])
+    @asset = Asset.find_by(id: params["id"]) || Asset.find_by(id: params["asset_id"])
+    if !@asset
+      render_404
+    end
   end
 
   def get_asset_type

@@ -4,13 +4,19 @@ class Asset < ApplicationRecord
 
   belongs_to :user
   belongs_to :asset_type
+  has_many :battery_replacements
   has_many :asset_missions
   has_many :missions, through: :asset_missions
 
 
   ## Return remaining battery hours at NOW
   def get_battery_status
-    battery_tlived = (DateTime.now.to_i - date_purchase.to_i) / 3600
+    last_bat_repl = self.battery_replacements.last
+    if last_bat_repl
+      battery_tlived = (DateTime.now.to_i - last_bat_repl.created_at.to_i) / 3600
+    else
+      battery_tlived = (DateTime.now.to_i - date_purchase.to_i) / 3600
+    end
     battery_state = battery_life - battery_tlived
     if battery_state < 0
       battery_state = 0

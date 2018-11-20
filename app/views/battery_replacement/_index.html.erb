@@ -1,0 +1,52 @@
+<div class="card-pf">
+  <header class="login-pf-header">
+    <h1>Battery replacment</h1>
+  </header>
+  <% flash.each do |key, value| %>
+  <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
+    <p>
+      <%= value %>
+    </p>
+  </div>
+  <% end %>
+  <div class="row" style="margin-top:1em;margin-bottom:1em;">
+    <div class="col-md-2">
+      <%= link_to 'Battery replaced', asset_replace_battery_path(@asset),method: :post, class: "btn btn-primary btn-xs" %>
+    </div>
+    <div class="col-md-10">
+      <% if @asset.battery_life
+      pg_class = "progress-bar-success"
+      if @asset.get_battery_status_pct < 15
+      pg_class = "progress-bar-danger"
+    elsif @asset.get_battery_status_pct < 30
+      pg_class = "progress-bar-warning"
+    elsif @asset.get_battery_status_pct < 60
+      pg_class = "progress-bar-info"
+      end
+      %>
+      <div class="progress">
+        <div class="progress-bar <%= pg_class %>" role="progressbar" aria-valuenow="<%= @asset.get_battery_status_pct %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @asset.get_battery_status_pct %>%;">
+          <span><%= @asset.get_battery_status_pct %>%</span>
+        </div>
+      </div>
+      <% else %>
+      -
+      <% end %>
+    </div>
+  </div>
+  <ul class="list-group">
+    <% @battery_replacements.each do |battery_replacement| %>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-md-8 text-center">
+          <%= battery_replacement.created_at.strftime("%d-%m-%Y") %>
+        </div>
+        <div class="col-md-4">
+          <%= battery_replacement.user.firstname.capitalize %>
+        </div>
+      </div>
+      <% end %>
+    </li>
+    <li class="list-group-item text-center">...</li>
+  </ul>
+</div>
