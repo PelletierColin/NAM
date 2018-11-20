@@ -1,5 +1,5 @@
 class MissionsController < ApplicationController
-  before_action :must_be_logged,   only: [:new, :create, :update, :prepare_assets, :add_assets]
+  before_action :must_be_logged,   only: [:new, :create, :update, :prepare_assets, :add_assets, :extract_asset]
   before_action :get_mission,      only: [:show, :update, :prepare_assets, :add_assets, :extract_asset]
   before_action :get_asset_mission, only: [:extract_asset]
 
