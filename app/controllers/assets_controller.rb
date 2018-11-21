@@ -41,12 +41,17 @@ class AssetsController < ApplicationController
   end
 
   def replace_battery
-    @battery_replacement = BatteryReplacement.new(:asset=>@asset, :user=>current_logged_user)
-    if @battery_replacement.save
-      flash[:success] = "Battery changed successfully."
-      redirect_to asset_path(@asset)
+    if @asset.battery_life
+      @battery_replacement = BatteryReplacement.new(:asset=>@asset, :user=>current_logged_user)
+      if @battery_replacement.save
+        flash[:success] = "Battery changed successfully."
+        redirect_to asset_path(@asset)
+      else
+        flash[:danger] =  "Failed to change the battery"
+        redirect_to asset_path(@asset)
+      end
     else
-      flash[:danger] =  "Failed to change the battery"
+      flash[:warning] =  "This asset has no battery, you can't replace it ;)"
       redirect_to asset_path(@asset)
     end
   end
@@ -60,6 +65,9 @@ class AssetsController < ApplicationController
 
   def get_asset_type
     @asset_type = AssetType.find_by(id: asset_params["asset_type_id"])
+    if !@asset_type
+      render_404
+    end
   end
 
   def asset_params
