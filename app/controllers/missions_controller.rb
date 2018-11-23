@@ -60,7 +60,7 @@ class MissionsController < ApplicationController
     else
       flash[:warning] = "Select an asset related to this mission."
     end
-    redirect_to mission_prepare_assets_path(@mission)
+    redirect_to mission_path(@mission)
   end
 
   def extract_asset

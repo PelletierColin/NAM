@@ -16,8 +16,7 @@
         <th>Asset serial</th>
         <th>Description</th>
         <th>Date of purchase</th>
-        <th>Battery life</th>
-        <th>Battery %</th>
+        <th>Expected lifetime</th>
         <th>Owner</th>
         <th colspan="2">Actions</th>
       </tr>
@@ -28,14 +27,7 @@
       <td><%= asset.product_serial %></td>
       <td><%= asset.description %></td>
       <td><%= asset.date_purchase.strftime("%d-%m-%Y") %></td>
-      <td>
-        <% if asset.battery_life %>
-        <%= asset.battery_life %> h (<%= asset.battery_life / 24 %> days)
-        <% else %>
-        -
-        <% end %>
-      </td>
-      <td>
+      <td class="text-center">
         <% if asset.battery_life
         pg_class = "progress-bar-success"
         if asset.get_battery_status_pct < 15
@@ -51,6 +43,9 @@
             <span><%= asset.get_battery_status_pct %>%</span>
           </div>
         </div>
+        <% end %>
+        <% if asset.battery_life %>
+        <%= asset.battery_life %> h (<%= asset.battery_life / 24 %> days)
         <% else %>
         -
         <% end %>
