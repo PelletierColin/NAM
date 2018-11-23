@@ -3,11 +3,17 @@ class MissionsController < ApplicationController
   before_action :get_mission,      only: [:show, :update, :prepare_assets, :add_assets, :extract_asset]
   before_action :get_asset_mission, only: [:extract_asset]
 
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "missions", :missions_path
+
+
+
   def index
     @missions = Mission.all.order('starting_date desc', 'ending_date desc')
   end
 
   def new
+    add_breadcrumb "new mission"
     @mission = Mission.new
   end
 
@@ -23,6 +29,7 @@ class MissionsController < ApplicationController
   end
 
   def show
+    add_breadcrumb @mission.project_name
     @asset_missions = @mission.asset_missions.order('created_at desc')
   end
 
@@ -37,6 +44,8 @@ class MissionsController < ApplicationController
   end
 
   def prepare_assets
+    add_breadcrumb @mission.project_name, mission_path(@mission)
+    add_breadcrumb "bring assets"
     @assets = []
     Asset.all.each do |asset|
       if !asset.has_current_mission
