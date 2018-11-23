@@ -1,5 +1,6 @@
 class MissionsController < ApplicationController
   before_action :must_be_logged,   only: [:new, :create, :update, :prepare_assets, :add_assets, :extract_asset]
+  before_action :must_be_proprietary, only: [:update, :prepare_assets, :add_assets, :extract_asset]
   before_action :get_mission,      only: [:show, :update, :prepare_assets, :add_assets, :extract_asset]
   before_action :get_asset_mission, only: [:extract_asset]
 
@@ -90,6 +91,13 @@ class MissionsController < ApplicationController
     @asset_mission = AssetMission.find_by(id: params["mission_asset_id"])
     if !@asset_mission || @asset_mission.mission != @mission
       render_404
+    end
+  end
+
+  def must_be_proprietary
+    self.get_mission
+    if current_logged_user && @mission.user != current_logged_user
+      render_403
     end
   end
 

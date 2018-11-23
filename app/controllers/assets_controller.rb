@@ -1,5 +1,6 @@
 class AssetsController < ApplicationController
   before_action :must_be_logged, only: [:new, :create, :update, :replace_battery]
+  before_action :must_be_proprietary, only: [:update, :replace_battery]
   before_action :get_asset_type, only: [:create]
   before_action :get_asset,      only: [:show, :update, :replace_battery]
 
@@ -71,6 +72,13 @@ class AssetsController < ApplicationController
     @asset_type = AssetType.find_by(id: asset_params["asset_type_id"])
     if !@asset_type
       render_404
+    end
+  end
+
+  def must_be_proprietary
+    self.get_asset
+    if @asset.user != current_logged_user
+      render_403
     end
   end
 
