@@ -2,11 +2,14 @@ class AssetTypesController < ApplicationController
   before_action :must_be_logged, only: [:new, :create, :update]
   before_action :get_asset_type, only: [:show, :update]
 
+  add_breadcrumb "asset types", :asset_types_path
+
   def index
     @asset_types = AssetType.all
   end
 
   def new
+    add_breadcrumb "new asset type"
     @asset_type = AssetType.new
   end
 
@@ -21,6 +24,7 @@ class AssetTypesController < ApplicationController
   end
 
   def show
+    add_breadcrumb @asset_type.name, asset_type_path(@asset_type)
     @assets = Asset.where(asset_type: @asset_type)
   end
 
