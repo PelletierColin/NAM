@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :must_be_proprietary, only:   [:edit, :update, :show]
 
-
   def new
+    add_breadcrumb "new user"
     @user = User.new
   end
 
@@ -19,9 +19,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    add_breadcrumb current_logged_user.firstname
   end
 
   def edit
+    add_breadcrumb current_logged_user.firstname, user_path(current_logged_user)
+    add_breadcrumb "edit"
   end
 
   def update
@@ -43,6 +46,8 @@ class UsersController < ApplicationController
   end
 
   def delete
+    add_breadcrumb current_logged_user.firstname, user_path(current_logged_user)
+    add_breadcrumb "delete"
   end
 
   def destroy
