@@ -3,7 +3,6 @@ class MissionsController < ApplicationController
   before_action :get_mission,      only: [:show, :update, :prepare_assets, :add_assets, :extract_asset]
   before_action :get_asset_mission, only: [:extract_asset]
 
-  add_breadcrumb "Home", :root_path
   add_breadcrumb "missions", :missions_path
 
 

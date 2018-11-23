@@ -3,11 +3,14 @@ class AssetsController < ApplicationController
   before_action :get_asset_type, only: [:create]
   before_action :get_asset,      only: [:show, :update, :replace_battery]
 
+  add_breadcrumb "assets", :assets_path
+
   def index
     @assets = Asset.all
   end
 
   def new
+    add_breadcrumb "new asset"
     @asset = Asset.new
     @asset_types = AssetType.all
   end
@@ -25,6 +28,7 @@ class AssetsController < ApplicationController
   end
 
   def show
+    add_breadcrumb @asset.product_serial, asset_path(@asset)
     @asset_types = AssetType.all
     @battery_replacements = @asset.battery_replacements.order('created_at desc').limit(10)
     @missions = @asset.missions.order('starting_date desc', 'ending_date desc')
