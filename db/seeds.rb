@@ -5,3 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Add a seed user in development environment only
+if :development
+  @user = User.new({
+    firstname: 'admin',
+    lastname: 'admin',
+    mail: 'admin@isska.ch',
+    password: 'admin12',
+    password_confirmation: 'admin12'
+  })
+
+  @user.gen_token_and_salt
+  if @user.save
+    puts 'seed ok'
+  else
+    puts 'error'
+  end
+end
