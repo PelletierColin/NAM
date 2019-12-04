@@ -1,5 +1,5 @@
 class AssetsController < ApplicationController
-  before_action :must_be_logged, only: [:new, :create, :update, :replace_battery]
+  before_action :must_be_logged, only: [:new, :create, :update, :destroy, :replace_battery]
   before_action :must_be_proprietary, only: [:update, :replace_battery]
   before_action :get_asset_type, only: [:create]
   before_action :get_asset,      only: [:show, :update, :replace_battery]
@@ -42,6 +42,17 @@ class AssetsController < ApplicationController
     else
       flash[:danger] =  "Failed to update "+@asset.product_serial.upcase
       redirect_to asset_path(@asset)
+    end
+  end
+
+  def destroy
+    @asset = Asset.find(params[:id])
+    if @asset.destroy
+      flash[:success] = "Asset removed"
+      redirect_to assets_path()
+    else
+      flash[:danger] = "Failed to remove asset "+@asset.name
+      redirect_to asset_path(@asset_type) # todo: is this really neaded ?
     end
   end
 

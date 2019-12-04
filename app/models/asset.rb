@@ -4,8 +4,8 @@ class Asset < ApplicationRecord
 
   belongs_to :user
   belongs_to :asset_type
-  has_many :battery_replacements
-  has_many :asset_missions
+  has_many :battery_replacements, dependent: :destroy
+  has_many :asset_missions, dependent: :destroy
   has_many :missions, through: :asset_missions
 
 
