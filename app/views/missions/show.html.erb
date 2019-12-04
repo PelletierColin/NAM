@@ -3,7 +3,7 @@
     <h1>
       <%= @mission.project_name.upcase %>
 
-      <%= link_to 'Remove', mission_path(@mission), method: :delete, class: "btn btn-danger pull-right" %>
+      <%= link_to 'Remove', mission_path(@mission), method: :delete, data: { :confirm => "Are you sure?" }, class: "btn btn-danger pull-right" %>
     </h1>
   </div>
   <% flash.each do |key, value| %>

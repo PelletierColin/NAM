@@ -3,7 +3,7 @@
     <h1>
       <%= @asset_type.name.capitalize %>
 
-      <%= link_to 'Remove', asset_type_path(@asset_type), method: :delete, class: "btn btn-danger pull-right" %>
+      <%= link_to 'Remove', asset_type_path(@asset_type), method: :delete, data: { :confirm => "Are you sure?" }, class: "btn btn-danger pull-right" %>
     </h1>
   </div>
   <% flash.each do |key, value| %>
