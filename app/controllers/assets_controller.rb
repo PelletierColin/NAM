@@ -49,10 +49,10 @@ class AssetsController < ApplicationController
     @asset = Asset.find(params[:id])
     if @asset.destroy
       flash[:success] = "Asset removed"
-      redirect_to assets_path()
+      redirect_to assets_path
     else
-      flash[:danger] = "Failed to remove asset "+@asset.name
-      redirect_to asset_path(@asset_type) # todo: is this really neaded ?
+      flash[:danger] = "Failed to remove asset "+@asset.product_serial
+      redirect_to asset_path(@asset) # todo: is this really neaded ?
     end
   end
 
