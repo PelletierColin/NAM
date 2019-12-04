@@ -14,7 +14,7 @@
   <% @asset_missions.each do |asset_mission| %>
   <% asset = asset_mission.asset %>
   <tr>
-    <td><%= asset.asset_type.name %></td>
+    <td><%= asset.asset_type ? asset.asset_type.name : '-' %></td>
     <td><%= asset.product_serial %></td>
     <td><%= asset.description %></td>
     <td><%= asset.date_purchase.strftime("%m-%Y") %></td>

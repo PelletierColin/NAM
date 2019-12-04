@@ -1,6 +1,10 @@
 <div class="card-pf">
   <div class="login-pf-header">
-    <h1><%= @asset_type.name.capitalize %></h1>
+    <h1>
+      <%= @asset_type.name.capitalize %>
+
+      <%= link_to 'Remove', asset_type_path(@asset_type), method: :delete, class: "btn btn-danger pull-right" %>
+    </h1>
   </div>
   <% flash.each do |key, value| %>
   <div id="error_explanation" class="alert alert-<%=key%>" role="alert">

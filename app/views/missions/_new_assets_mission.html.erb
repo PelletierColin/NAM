@@ -15,7 +15,7 @@
     <% @assets.each do |asset| %>
     <tr>
       <td><%= check_box_tag('assets_id[]', asset.id, false) %></td>
-      <td><%= asset.asset_type.name %></td>
+      <td><%= asset.asset_type ? asset.asset_type.name : '-' %></td>
       <td><%= asset.product_serial %></td>
       <td><%= asset.description %></td>
       <td>

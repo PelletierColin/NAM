@@ -1,5 +1,5 @@
 class AssetTypesController < ApplicationController
-  before_action :must_be_logged, only: [:new, :create, :update]
+  before_action :must_be_logged, only: [:new, :create, :update, :destroy]
   before_action :get_asset_type, only: [:show, :update]
 
   add_breadcrumb "asset types", :asset_types_path
@@ -35,6 +35,17 @@ class AssetTypesController < ApplicationController
     else
       flash[:danger] =  "Failed to update "+@asset_type.name.capitalize
       redirect_to asset_type_path(@asset_type)
+    end
+  end
+
+  def destroy
+    @asset_type = AssetType.find(params[:id])
+    if @asset_type.destroy
+      flash[:success] =  "Asset type removed"
+      redirect_to asset_types_path()
+    else
+      flash[:danger] =  "Failed to remove "+@asset_type.name
+      redirect_to asset_type_path(@asset_type) # todo: is this really neaded ?
     end
   end
 

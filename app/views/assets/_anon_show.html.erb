@@ -9,7 +9,7 @@
   <div class="row">
     <label class="col-sm-2 col-md-2">Asset type</label>
     <div class="col-sm-10 col-md-10">
-      <%= @asset.asset_type.name %>
+      <%= @asset.asset_type ? @asset.asset_type.name : '-' %>
     </div>
   </div>
 
