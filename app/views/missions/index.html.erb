@@ -1,6 +1,9 @@
 <div class="card-pf">
   <header class="login-pf-header">
-    <h1>Missions</h1>
+    <h1>
+      Missions
+      <%= link_to 'New mission', new_mission_path, class: "btn btn-success pull-right" %>
+    </h1>
   </header>
   <% flash.each do |key, value| %>
   <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
