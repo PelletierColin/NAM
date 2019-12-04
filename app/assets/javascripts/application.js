@@ -13,7 +13,5 @@
 //= require rails-ujs
 //= require jquery
 //= require bootstrap
-//= require bootstrap/alert
-//= require bootstrap/dropdown
 //= require patternfly
 //= require_tree .
