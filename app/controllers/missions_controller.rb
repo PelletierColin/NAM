@@ -1,5 +1,5 @@
 class MissionsController < ApplicationController
-  before_action :must_be_logged, only: [:new, :create, :update, :prepare_assets, :add_assets, :extract_asset]
+  before_action :must_be_logged, only: [:new, :create, :update, :destroy, :prepare_assets, :add_assets, :extract_asset]
   before_action :must_be_proprietary, only: [:update, :prepare_assets, :add_assets, :extract_asset]
   before_action :get_mission, only: [:show, :update, :prepare_assets, :add_assets, :extract_asset]
   before_action :get_asset_mission, only: [:extract_asset]
@@ -40,6 +40,17 @@ class MissionsController < ApplicationController
     else
       flash[:danger] = "Failed to update "+@mission.project_name
       redirect_to mission_path(@mission)
+    end
+  end
+
+  def destroy
+    @mission = Mission.find(params[:id])
+    if @mission.destroy
+      flash[:success] = "Mission removed"
+      redirect_to missions_path
+    else
+      flash[:danger] = "Failed to remove mission "+@mission.project_name
+      redirect_to mimssion_path(@mission) # todo: is this really neaded ?
     end
   end
 
