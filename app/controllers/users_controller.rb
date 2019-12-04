@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :must_be_proprietary, only:   [:edit, :update, :show]
+  before_action :must_be_proprietary, only: [:edit, :update, :show]
 
   def new
     add_breadcrumb "new user"
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       log_in_session(@user)
       redirect_to user_path(@user.id)
     else
-      flash.now[:danger] =  "Failed to create "+@user.firstname + ", "+@user.errors.full_messages.to_sentence+"."
+      flash.now[:danger] = "Failed to create "+@user.firstname + ", "+@user.errors.full_messages.to_sentence+"."
       render 'new'
     end
   end
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
       flash[:success] = "Profil successfully updated."
       redirect_to user_path(@user.id)
     else
-      flash[:danger] =  "Failed to update "+@user.firstname + ", "+@user.errors.full_messages.to_sentence+"."
+      flash[:danger] = "Failed to update "+@user.firstname + ", "+@user.errors.full_messages.to_sentence+"."
       redirect_to edit_user_path(@user.id)
     end
   end
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
       flash[:success] = "Account successfully deleted."
       redirect_to root_path
     else
-      flash[:danger] =  "Failed to delete your account, "+@user.errors.full_messages.to_sentence
+      flash[:danger] = "Failed to delete your account, "+@user.errors.full_messages.to_sentence
       redirect_to user_delete_path(@user.id)
     end
   end

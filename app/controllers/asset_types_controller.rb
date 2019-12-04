@@ -18,7 +18,7 @@ class AssetTypesController < ApplicationController
     if @asset_type.save
       redirect_to asset_types_path(@asset_type.id)
     else
-      flash.now[:danger] =  "Failed to create "+@asset_type.name
+      flash.now[:danger] = "Failed to create "+@asset_type.name
       render 'new'
     end
   end
@@ -33,7 +33,7 @@ class AssetTypesController < ApplicationController
       flash[:success] = "Asset type successfully updated."
       redirect_to asset_type_path(@asset_type)
     else
-      flash[:danger] =  "Failed to update "+@asset_type.name.capitalize
+      flash[:danger] = "Failed to update "+@asset_type.name.capitalize
       redirect_to asset_type_path(@asset_type)
     end
   end
@@ -41,10 +41,10 @@ class AssetTypesController < ApplicationController
   def destroy
     @asset_type = AssetType.find(params[:id])
     if @asset_type.destroy
-      flash[:success] =  "Asset type removed"
-      redirect_to asset_types_path()
+      flash[:success] = "Asset type removed"
+      redirect_to asset_types_path
     else
-      flash[:danger] =  "Failed to remove "+@asset_type.name
+      flash[:danger] = "Failed to remove "+@asset_type.name
       redirect_to asset_type_path(@asset_type) # todo: is this really neaded ?
     end
   end

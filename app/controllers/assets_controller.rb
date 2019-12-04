@@ -2,7 +2,7 @@ class AssetsController < ApplicationController
   before_action :must_be_logged, only: [:new, :create, :update, :destroy, :replace_battery]
   before_action :must_be_proprietary, only: [:update, :replace_battery]
   before_action :get_asset_type, only: [:create]
-  before_action :get_asset,      only: [:show, :update, :replace_battery]
+  before_action :get_asset, only: [:show, :update, :replace_battery]
 
   add_breadcrumb "assets", :assets_path
 
@@ -23,7 +23,7 @@ class AssetsController < ApplicationController
     if @asset.save
       redirect_to assets_path(@asset.id)
     else
-      flash[:danger] =  "Failed to create "+@asset.product_serial.upcase+"."+@asset.errors.full_messages.to_sentence
+      flash[:danger] = "Failed to create "+@asset.product_serial.upcase+"."+@asset.errors.full_messages.to_sentence
       redirect_to new_asset_path
     end
   end
@@ -40,7 +40,7 @@ class AssetsController < ApplicationController
       flash[:success] = "Asset successfully updated."
       redirect_to asset_path(@asset)
     else
-      flash[:danger] =  "Failed to update "+@asset.product_serial.upcase
+      flash[:danger] = "Failed to update "+@asset.product_serial.upcase
       redirect_to asset_path(@asset)
     end
   end
@@ -63,11 +63,11 @@ class AssetsController < ApplicationController
         flash[:success] = "Battery changed successfully."
         redirect_to asset_path(@asset)
       else
-        flash[:danger] =  "Failed to change the battery"
+        flash[:danger] = "Failed to change the battery"
         redirect_to asset_path(@asset)
       end
     else
-      flash[:warning] =  "This asset has no battery, you can't replace it ;)"
+      flash[:warning] = "This asset has no battery, you can't replace it ;)"
       redirect_to asset_path(@asset)
     end
   end
