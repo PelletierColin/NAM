@@ -29,27 +29,27 @@
         </button>
         <ul class="dropdown-menu">
           <li>
-            <%= link_to 'Settings', user_path(currently_logged) %>
+            <%= link_to t('menu.settings'), user_path(currently_logged) %>
           </li>
           <li class="divider"></li>
           <li>
-            <%= link_to 'Log out', logout_path, method: :delete %>
+            <%= link_to t('menu.log_out'), logout_path, method: :delete %>
           </li>
         </ul>
         <% else %>
         <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
           <span class="pficon pficon-user"></span>
           <span class="dropdown-title">
-            Account <b class="caret"></b>
+            <%= t('menu.account_label') %> <b class="caret"></b>
           </span>
         </button>
         <ul class="dropdown-menu">
           <li>
-            <%= link_to 'Log in', login_path %>
+            <%= link_to t('menu.log_in'), login_path %>
           </li>
           <li class="divider"></li>
           <li>
-            <%= link_to 'Register', new_user_path %>
+            <%= link_to t('menu.register'), new_user_path %>
           </li>
         </ul>
         <% end %>
@@ -57,24 +57,24 @@
     </ul>
     <ul class="nav navbar-nav navbar-primary">
       <li>
-        <%= link_to 'Home', root_path %>
+        <%= link_to t('menu.home'), root_path %>
       </li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          Assets
+          <%= t('menu.assets_label') %>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
           <li>
-            <%= link_to "Asset types", asset_types_path %>
+            <%= link_to t('menu.asset_types'), asset_types_path %>
           </li>
           <li>
-            <%= link_to 'Assets', assets_path %>
+            <%= link_to t('menu.assets'), assets_path %>
           </li>
         </ul>
       </li>
       <li>
-        <%= link_to 'Missions', missions_path %>
+        <%= link_to t('menu.missions'), missions_path %>
       </li>
     </ul>
   </div>

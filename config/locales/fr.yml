@@ -1,0 +1,11 @@
+fr:
+  menu:
+    account_label: "Compte"
+    log_in: "Connexion"
+    log_out: "Déconnexion"
+    register: "Créer un compte"
+    settings: "Réglages"
+    assets_label: "Capteurs"
+    asset_types: "Catégories"
+    assets: "Capteurs"
+    missions: "Missions"

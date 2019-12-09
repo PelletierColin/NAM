@@ -30,4 +30,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  menu:
+    account_label: "Account"
+    log_in: "Log in"
+    log_out: "Log out"
+    register: "Register"
+    settings: "Settings"
+    assets_label: "Assets"
+    asset_types: "Asset types"
+    assets: "Assets"
+    missions: "Missions"
