@@ -17,7 +17,7 @@
     <td><%= asset.asset_type ? asset.asset_type.name : '-' %></td>
     <td><%= asset.product_serial %></td>
     <td><%= asset.description %></td>
-    <td><%= asset.date_purchase.strftime("%m-%Y") %></td>
+    <td><%= asset.date_purchase.strftime("%d.%m.%Y") %></td>
     <td class="text-center">
       <% if asset.battery_life
       pg_class = "progress-bar-success"
@@ -41,10 +41,10 @@
       -
       <% end %>
     </td>
-    <td><%= asset_mission.created_at.strftime("%d-%m-%Y") %></td>
+    <td><%= asset_mission.created_at.strftime("%d.%m.%Y") %></td>
     <td>
       <% if asset_mission.extracted_at %>
-      <%= asset_mission.extracted_at.strftime("%d-%m-%Y") %>
+      <%= asset_mission.extracted_at.strftime("%d.%m.%Y") %>
       <% else %>
       -
       <% end %>

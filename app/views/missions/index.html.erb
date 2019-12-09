@@ -24,8 +24,8 @@
     <tr>
       <td><%= mission.project_name %></td>
       <td><%= mission.description %></td>
-      <td><%= mission.starting_date.strftime("%d-%m-%Y") %></td>
-      <td><%= mission.ending_date.strftime("%d-%m-%Y") %></td>
+      <td><%= mission.starting_date.strftime("%d.%m.%Y") %></td>
+      <td><%= mission.ending_date.strftime("%d.%m.%Y") %></td>
       <th class="text-center">
         <span class="label label-default"><%= mission.get_current_assets.count %></span>
       </th>
