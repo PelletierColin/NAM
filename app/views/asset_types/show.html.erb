@@ -8,13 +8,7 @@
       <% end %>
     </h1>
   </div>
-  <% flash.each do |key, value| %>
-  <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
-    <p>
-      <%= value %>
-    </p>
-  </div>
-  <% end %>
+
   <div class="row">
     <div class="col-md-6">
       <%= render 'form_new' %>

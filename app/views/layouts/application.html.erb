@@ -11,6 +11,14 @@
   <body class="cards-pf">
     <%= render 'top_menu' %>
     <div class="container-fluid">
+      <% flash.each do |key, value| %>
+        <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
+          <p>
+            <%= value %>
+          </p>
+        </div>
+      <% end %>
+
       <%= render_breadcrumbs %>
       <%= yield %>
     </div>

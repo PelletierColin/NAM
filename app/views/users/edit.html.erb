@@ -3,12 +3,6 @@
     <h1>My profil</h1>
     <p class="text-center">Edit your preferences</p>
   </header>
-  <% flash.each do |key, value| %>
-  <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
-    <p>
-      <%= value %>
-    </p>
-  </div>
-  <% end %>
+
   <%= render 'form_new' %>
 </div>

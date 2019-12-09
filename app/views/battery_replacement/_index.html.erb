@@ -2,13 +2,7 @@
   <header class="login-pf-header">
     <h1>Battery replacment</h1>
   </header>
-  <% flash.each do |key, value| %>
-  <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
-    <p>
-      <%= value %>
-    </p>
-  </div>
-  <% end %>
+
   <div class="row" style="margin-top:1em;margin-bottom:1em;">
     <div class="col-md-2">
       <%= link_to 'Battery replaced', asset_replace_battery_path(@asset),method: :post, class: "btn btn-primary btn-xs" %>
