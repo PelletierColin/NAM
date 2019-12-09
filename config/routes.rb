@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   # "assets" is a reserved root used by rails to serve img,css,...
   resources :assets, path: :items do
     post 'replace_battery'
+    post 'archive'
   end
 
   ## Asset types

@@ -58,7 +58,7 @@ class MissionsController < ApplicationController
     add_breadcrumb @mission.project_name, mission_path(@mission)
     add_breadcrumb "bring assets"
     @assets = []
-    Asset.all.each do |asset|
+    Asset.where(deleted: false).each do |asset|
       if !asset.has_current_mission
         @assets.push(asset)
       end

@@ -25,7 +25,7 @@ class AssetTypesController < ApplicationController
 
   def show
     add_breadcrumb @asset_type.name, asset_type_path(@asset_type)
-    @assets = Asset.where(asset_type: @asset_type)
+    @assets = Asset.where(asset_type: @asset_type, deleted: false)
   end
 
   def update

@@ -1,13 +1,13 @@
 class AssetsController < ApplicationController
-  before_action :must_be_logged, only: [:new, :create, :update, :destroy, :replace_battery]
+  before_action :must_be_logged, only: [:new, :create, :update, :destroy, :archive, :replace_battery]
   before_action :must_be_proprietary, only: [:update, :replace_battery]
   before_action :get_asset_type, only: [:create]
-  before_action :get_asset, only: [:show, :update, :replace_battery]
+  before_action :get_asset, only: [:show, :update, :archive, :replace_battery]
 
   add_breadcrumb "assets", :assets_path
 
   def index
-    @assets = Asset.all
+    @assets = Asset.where(deleted: false)
   end
 
   def new
@@ -45,6 +45,7 @@ class AssetsController < ApplicationController
     end
   end
 
+  # this method is no more used for now !
   def destroy
     @asset = Asset.find(params[:id])
     if @asset.destroy
@@ -52,6 +53,16 @@ class AssetsController < ApplicationController
       redirect_to assets_path
     else
       flash[:danger] = "Failed to remove asset "+@asset.product_serial
+      redirect_to asset_path(@asset) # todo: is this really neaded ?
+    end
+  end
+
+  def archive
+    if @asset.update(deleted: true)
+      flash[:success] = "Asset archived"
+      redirect_to assets_path
+    else
+      flash[:danger] = "Failed to archive asset "+@asset.product_serial
       redirect_to asset_path(@asset) # todo: is this really neaded ?
     end
   end
@@ -73,7 +84,7 @@ class AssetsController < ApplicationController
   end
 
   def get_asset
-    @asset = Asset.find_by(id: params["id"]) || Asset.find_by(id: params["asset_id"])
+    @asset = Asset.find_by(id: params["id"], deleted: false) || Asset.find_by(id: params["asset_id"], deleted: false)
     if !@asset
       render_404
     end
