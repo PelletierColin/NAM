@@ -1,8 +1,8 @@
 class MissionsController < ApplicationController
-  before_action :must_be_logged, only: [:new, :create, :update, :destroy, :prepare_assets, :add_assets, :extract_asset]
+  before_action :must_be_logged, only: [:new, :create, :update, :destroy, :prepare_assets, :add_assets, :extract_asset, :remove_asset]
   before_action :must_be_proprietary, only: [:update, :prepare_assets, :add_assets, :extract_asset]
-  before_action :get_mission, only: [:show, :update, :prepare_assets, :add_assets, :extract_asset]
-  before_action :get_asset_mission, only: [:extract_asset]
+  before_action :get_mission, only: [:show, :update, :prepare_assets, :add_assets, :extract_asset, :remove_asset]
+  before_action :get_asset_mission, only: [:extract_asset, :remove_asset]
 
   add_breadcrumb "missions", :missions_path
 
@@ -87,6 +87,15 @@ class MissionsController < ApplicationController
     @asset_mission.extracted_at = DateTime.now
     if !@asset_mission.save
       flash[:danger] = "Error when trying to assign the \""+@asset_mission.errors.full_messages.to_sentence
+    end
+    redirect_to mission_path(@mission)
+  end
+
+  def remove_asset
+    if @asset_mission.destroy
+      flash[:success] = 'Asset removed from the mission'
+    else
+      flash[:danger] = 'Failed to remove asset ' + @asset.product_serial + 'from mission ' + @mission.project_name
     end
     redirect_to mission_path(@mission)
   end
