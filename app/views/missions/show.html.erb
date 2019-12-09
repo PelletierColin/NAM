@@ -3,7 +3,9 @@
     <h1>
       <%= @mission.project_name.upcase %>
 
-      <%= link_to 'Remove', mission_path(@mission), method: :delete, data: { :confirm => "Are you sure?" }, class: "btn btn-danger pull-right" %>
+      <% if is_logged_in %>
+        <%= link_to 'Remove', mission_path(@mission), method: :delete, data: { :confirm => "Are you sure?" }, class: "btn btn-danger pull-right" %>
+      <% end %>
     </h1>
   </div>
   <% flash.each do |key, value| %>

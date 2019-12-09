@@ -2,7 +2,9 @@
   <header class="login-pf-header">
     <h1>
       Assets
-      <%= link_to 'New asset', new_asset_path, class: "btn btn-success pull-right" %>
+      <% if is_logged_in %>
+        <%= link_to 'New asset', new_asset_path, class: "btn btn-success pull-right" %>
+      <% end %>
     </h1>
   </header>
   <% flash.each do |key, value| %>
