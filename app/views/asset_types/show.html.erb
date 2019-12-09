@@ -13,9 +13,7 @@
     <div class="col-md-6">
       <%= render 'form_new' %>
     </div>
-    <div class="col-md-6">
-      <h2><%= @asset_type.name.capitalize %> assets</h2>
-      <%= render :template => 'assets/index' %>
-    </div>
   </div>
 </div>
+  
+<%= render :template => 'assets/index' %>
