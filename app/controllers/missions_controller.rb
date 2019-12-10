@@ -35,14 +35,14 @@ class MissionsController < ApplicationController
   end
 
   def edit
-    add_breadcrumb @mission.project_name
+    add_breadcrumb @mission.project_name, mission_path(@mission)
     add_breadcrumb 'edit'
 
     @asset_missions = @mission.asset_missions.order('created_at desc')
   end
 
   def update
-    add_breadcrumb @mission.project_name
+    add_breadcrumb @mission.project_name, mission_path(@mission)
     add_breadcrumb 'edit'
 
     if @mission.update(mission_params)

@@ -30,7 +30,7 @@ class AssetsController < ApplicationController
   end
 
   def show
-    add_breadcrumb @asset.product_serial, asset_path(@asset)
+    add_breadcrumb @asset.product_serial
     @asset_types = AssetType.all
     @battery_replacements = @asset.battery_replacements.order('created_at desc').limit(10)
     @missions = @asset.missions.order('starting_date desc', 'ending_date desc')
