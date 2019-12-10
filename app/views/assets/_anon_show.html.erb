@@ -1,35 +1,35 @@
 <div>
   <div class="row">
-    <label class="col-sm-2 col-md-2">Owner</label>
-    <div class="col-sm-10 col-md-10">
+    <label class="col-sm-4 col-md-4">Owner</label>
+    <div class="col-sm-8 col-md-8">
       <%= @asset.user.firstname.capitalize %> <%= @asset.user.lastname.capitalize %>
     </div>
   </div>
 
   <div class="row">
-    <label class="col-sm-2 col-md-2">Asset type</label>
-    <div class="col-sm-10 col-md-10">
+    <label class="col-sm-4 col-md-4">Asset type</label>
+    <div class="col-sm-8 col-md-8">
       <%= @asset.asset_type ? @asset.asset_type.name : '-' %>
     </div>
   </div>
 
   <div class="row">
-    <label class="col-sm-2 col-md-2">Product serial</label>
-    <div class="col-sm-10 col-md-10">
+    <label class="col-sm-4 col-md-4">Product serial</label>
+    <div class="col-sm-8 col-md-8">
       <%= @asset.product_serial %>
     </div>
   </div>
 
   <div class="row">
-    <label class="col-sm-2 col-md-2">Description</label>
-    <div class="col-sm-10 col-md-10">
+    <label class="col-sm-4 col-md-4">Description</label>
+    <div class="col-sm-8 col-md-8">
       <%= @asset.description %>
     </div>
   </div>
 
   <div class="row">
-    <label class="col-sm-2 col-md-2">Battery life (hours)</label>
-    <div class="col-sm-10 col-md-10">
+    <label class="col-sm-4 col-md-4">Battery life (hours)</label>
+    <div class="col-sm-8 col-md-8">
       <% if @asset.battery_life %>
       <%= @asset.battery_life %> hours
       <% else %>
@@ -39,8 +39,8 @@
   </div>
 
   <div class="row">
-    <label class="col-sm-2 col-md-2">Date of purchase</label>
-    <div class="col-sm-10 col-md-10">
+    <label class="col-sm-4 col-md-4">Date of purchase</label>
+    <div class="col-sm-8 col-md-8">
       <%= @asset.date_purchase.strftime("%d.%m.%Y") %>
     </div>
   </div>

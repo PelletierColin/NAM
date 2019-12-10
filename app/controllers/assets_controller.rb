@@ -1,8 +1,8 @@
 class AssetsController < ApplicationController
-  before_action :must_be_logged, only: [:new, :create, :update, :destroy, :archive, :replace_battery]
+  before_action :must_be_logged, only: [:new, :create, :edit, :update, :destroy, :archive, :replace_battery]
   before_action :must_be_proprietary, only: [:update, :replace_battery]
   before_action :get_asset_type, only: [:create]
-  before_action :get_asset, only: [:show, :update, :archive, :replace_battery]
+  before_action :get_asset, only: [:show, :edit, :update, :archive, :replace_battery]
 
   add_breadcrumb "assets", :assets_path
 
@@ -36,13 +36,24 @@ class AssetsController < ApplicationController
     @missions = @asset.missions.order('starting_date desc', 'ending_date desc')
   end
 
+  def edit
+    add_breadcrumb @asset.product_serial, asset_path(@asset)
+    add_breadcrumb 'edit'
+
+    @asset_types = AssetType.all
+  end
+
   def update
+    add_breadcrumb @asset.product_serial, asset_path(@asset)
+    add_breadcrumb 'edit'
+
+    @asset_types = AssetType.all
+
     if @asset.update(asset_params)
       flash[:success] = "Asset successfully updated."
       redirect_to asset_path(@asset)
     else
-      flash[:danger] = "Failed to update "+@asset.product_serial.upcase
-      redirect_to asset_path(@asset)
+      render 'edit'
     end
   end
 

@@ -1,7 +1,7 @@
 class MissionsController < ApplicationController
-  before_action :must_be_logged, only: [:new, :create, :update, :destroy, :prepare_assets, :add_assets, :extract_asset, :remove_asset]
+  before_action :must_be_logged, only: [:new, :create, :edit, :update, :destroy, :prepare_assets, :add_assets, :extract_asset, :remove_asset]
   before_action :must_be_proprietary, only: [:update, :prepare_assets, :add_assets, :extract_asset]
-  before_action :get_mission, only: [:show, :update, :prepare_assets, :add_assets, :extract_asset, :remove_asset]
+  before_action :get_mission, only: [:show, :edit, :update, :prepare_assets, :add_assets, :extract_asset, :remove_asset]
   before_action :get_asset_mission, only: [:extract_asset, :remove_asset]
 
   add_breadcrumb "missions", :missions_path
@@ -34,13 +34,22 @@ class MissionsController < ApplicationController
     @asset_missions = @mission.asset_missions.order('created_at desc')
   end
 
+  def edit
+    add_breadcrumb @mission.project_name
+    add_breadcrumb 'edit'
+
+    @asset_missions = @mission.asset_missions.order('created_at desc')
+  end
+
   def update
+    add_breadcrumb @mission.project_name
+    add_breadcrumb 'edit'
+
     if @mission.update(mission_params)
       flash[:success] = "Mission successfully updated."
       redirect_to mission_path(@mission)
     else
-      flash[:danger] = "Failed to update "+@mission.project_name
-      redirect_to mission_path(@mission)
+      render 'edit'
     end
   end
 

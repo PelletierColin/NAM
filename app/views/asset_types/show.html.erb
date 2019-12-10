@@ -4,18 +4,17 @@
       <%= @asset_type.name.capitalize %>
 
       <% if is_logged_in %>
-        <%= link_to 'Remove', asset_type_path(@asset_type), method: :delete, data: { :confirm => "Are you sure?" }, class: "btn btn-danger pull-right" %>
+      <div class="pull-right">
+        <%= link_to 'Edit', edit_asset_type_path(@asset_type), class: "btn btn-primary" %>
+        <%= link_to 'Remove', asset_type_path(@asset_type), method: :delete, data: { :confirm => "Are you sure?" }, class: "btn btn-danger" %>
+      </div>
       <% end %>
     </h1>
   </div>
 
   <div class="row">
     <div class="col-md-6">
-      <% if is_logged_in %>
-      <%= render 'form_new' %>
-      <% else %>
       <%= render 'anon_show' %>
-      <% end %>
     </div>
   </div>
 </div>

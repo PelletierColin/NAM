@@ -1,6 +1,6 @@
 class AssetTypesController < ApplicationController
-  before_action :must_be_logged, only: [:new, :create, :update, :destroy]
-  before_action :get_asset_type, only: [:show, :update]
+  before_action :must_be_logged, only: [:new, :create, :edit, :update, :destroy]
+  before_action :get_asset_type, only: [:show, :edit, :update]
 
   add_breadcrumb "asset types", :asset_types_path
 
@@ -29,13 +29,20 @@ class AssetTypesController < ApplicationController
     @assets = Asset.where(asset_type: @asset_type, deleted: false)
   end
 
+  def edit
+    add_breadcrumb @asset_type.name, asset_type_path(@asset_type)
+    add_breadcrumb 'edit'
+  end
+
   def update
+    add_breadcrumb @asset_type.name, asset_type_path(@asset_type)
+    add_breadcrumb 'edit'
+
     if @asset_type.update(asset_type_params)
       flash[:success] = "Asset type successfully updated."
       redirect_to asset_type_path(@asset_type)
     else
-      flash[:danger] = "Failed to update "+@asset_type.name.capitalize
-      redirect_to asset_type_path(@asset_type)
+      render 'edit'
     end
   end
 
