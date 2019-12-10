@@ -18,25 +18,25 @@
 </div>
 <% end %>
 <div class="form-group">
-  <%= label_tag 'user', "Owner", class: 'col-sm-2 col-md-2 control-label' %>
+  <%= label_tag 'user', "Owner*", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
     <%= f.text_field :user, class: 'form-control', value: current_logged_user.firstname.capitalize+" "+current_logged_user.lastname.capitalize,readonly: true %>
   </div>
 </div>
 <div class="form-group">
-  <%= label_tag 'project_name', "Project name", class: 'col-sm-2 col-md-2 control-label' %>
+  <%= label_tag 'project_name', "Project name*", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
     <%= f.text_field :project_name, class: 'form-control'%>
   </div>
 </div>
 <div class="form-group">
-  <%= label_tag 'description', "Description", class: 'col-sm-2 col-md-2 control-label' %>
+  <%= label_tag 'description', "Description*", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
     <%= f.text_area :description, class: 'form-control'%>
   </div>
 </div>
 <div class="form-group">
-  <%= label_tag 'starting_date', "Starting date", class: 'col-sm-2 col-md-2 control-label' %>
+  <%= label_tag 'starting_date', "Starting date*", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
     <%= f.date_field :starting_date, class: 'form-control'%>
   </div>
