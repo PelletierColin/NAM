@@ -73,6 +73,7 @@ class MissionsController < ApplicationController
         asset_mission.mission = @mission
         asset_mission.asset = Asset.find_by(id: asset_id)
         asset_mission.user = current_logged_user
+        asset_mission.created_at = DateTime.now
         if !asset_mission.save
           flash[:danger] = "Error when trying to assign the \""+asset_mission.asset.product_serial+" "+asset_mission.asset.description+"\" to this mission. "+asset_mission.errors.full_messages.to_sentence
           break

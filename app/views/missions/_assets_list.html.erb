@@ -8,6 +8,7 @@
       <th>Expected lifetime</th>
       <th>Placed on</th>
       <th>Removed on</th>
+      <th>Comment</th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
@@ -49,15 +50,17 @@
       -
       <% end %>
     </td>
+    <td><%= asset_mission.placement_indications %></td>
     <td colspan="2">
       <% disabled = "" %>
       <% if asset_mission.extracted_at != nil %>
       <% disabled = "disabled " %>
       <% end %>
-      <%= link_to 'show', asset_path(asset), class: "btn btn-primary btn-xs" %>
+      <%= link_to 'show asset', asset_path(asset), class: "btn btn-primary btn-xs" %>
       <% if is_logged_in %>
         <%= link_to 'upload data', asset_path(asset), class: "disabled btn btn-primary btn-xs" %>
         <%= link_to 'battery replaced', asset_replace_battery_path(asset),method: :post, class: "btn btn-primary btn-xs" %>
+        <%= link_to 'update', mission_asset_mission_path(asset_mission.mission, asset_mission), method: :get, class: "btn btn-primary btn-xs" %>
         <%= link_to 'removed', mission_extract_asset_path(asset_mission.mission, asset_mission), method: :delete, class: disabled+"btn btn-danger btn-xs" %>
         <%= link_to 'delete', mission_remove_asset_path(asset_mission.mission, asset_mission), method: :post, data: { :confirm => "Are you sure?" }, class: "btn btn-danger btn-xs" %>
       <% end %>
