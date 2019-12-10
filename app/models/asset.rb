@@ -45,7 +45,8 @@ class Asset < ApplicationRecord
     self.missions.each do |mission|
       running_asset_missions = self.asset_missions.where(:mission => mission).where(:extracted_at => nil)
       running_asset_missions += self.asset_missions.where(:mission => mission).where('extracted_at >= ?', DateTime.now)
-      if mission.ending_date > DateTime.now && running_asset_missions.count > 0
+      # if mission.ending_date > DateTime.now && running_asset_missions.count > 0
+      if running_asset_missions.count > 0
         current_mission.push(mission)
       end
     end

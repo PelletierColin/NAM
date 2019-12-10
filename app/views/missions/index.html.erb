@@ -25,7 +25,7 @@
       <td><%= mission.project_name %></td>
       <td><%= mission.description %></td>
       <td><%= mission.starting_date.strftime("%d.%m.%Y") %></td>
-      <td><%= mission.ending_date.strftime("%d.%m.%Y") %></td>
+      <td><%= mission.ending_date ? mission.ending_date.strftime("%d.%m.%Y") : '-' %></td>
       <th><%= mission.get_current_assets.count %></th>
       <th><%= mission.user.firstname.capitalize %></th>
       <td colspan="2">
