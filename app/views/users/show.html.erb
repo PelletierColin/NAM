@@ -1,12 +1,5 @@
 <div class="card-pf">
   <div class="text-center">
-    <% flash.each do |key, value| %>
-    <div id="error_explanation" class="alert alert-<%=key%>" role="alert">
-      <p>
-        <%= value %>
-      </p>
-    </div>
-    <% end %>
     <h1>Hi <%= current_logged_user.firstname.capitalize %></h1>
     <div class="text-center">
       <p class="mb-0">
