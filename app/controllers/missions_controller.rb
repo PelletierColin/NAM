@@ -21,7 +21,8 @@ class MissionsController < ApplicationController
     @mission = Mission.new(mission_params)
     @mission.user = current_logged_user
     if @mission.save
-      redirect_to missions_path(@mission.id)
+      flash[:success] = "Mission successfully created."
+      redirect_to mission_path(@mission)
     else
       flash.now[:danger] = "Failed to create "+@mission.project_name
       render 'new'

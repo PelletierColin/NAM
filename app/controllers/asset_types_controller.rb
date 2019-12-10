@@ -16,7 +16,8 @@ class AssetTypesController < ApplicationController
   def create
     @asset_type = AssetType.new(asset_type_params)
     if @asset_type.save
-      redirect_to asset_types_path(@asset_type.id)
+      flash[:success] = "Asset type successfully created."
+      redirect_to asset_type_path(@asset_type)
     else
       flash.now[:danger] = "Failed to create "+@asset_type.name
       render 'new'
