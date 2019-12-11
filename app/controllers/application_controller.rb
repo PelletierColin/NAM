@@ -3,5 +3,5 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include SessionHelper
   include ErrorHelper
-  add_breadcrumb "Home", :root_path
+  add_breadcrumb 'Home', :root_path
 end

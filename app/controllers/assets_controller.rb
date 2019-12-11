@@ -1,17 +1,17 @@
 class AssetsController < ApplicationController
-  before_action :must_be_logged, only: [:new, :create, :edit, :update, :destroy, :archive, :replace_battery]
-  before_action :must_be_proprietary, only: [:update, :replace_battery]
+  before_action :must_be_logged, only: %i[new create edit update destroy archive replace_battery]
+  before_action :must_be_proprietary, only: %i[update replace_battery]
   before_action :get_asset_type, only: [:create]
-  before_action :get_asset, only: [:show, :edit, :update, :archive, :replace_battery]
+  before_action :get_asset, only: %i[show edit update archive replace_battery]
 
-  add_breadcrumb "assets", :assets_path
+  add_breadcrumb 'assets', :assets_path
 
   def index
     @assets = Asset.where(deleted: false)
   end
 
   def new
-    add_breadcrumb "new asset"
+    add_breadcrumb 'new asset'
     @asset = Asset.new
     @asset_types = AssetType.all
   end
@@ -21,10 +21,10 @@ class AssetsController < ApplicationController
     @asset.user = current_logged_user
     @asset.asset_type = @asset_type
     if @asset.save
-      flash[:success] = "Asset successfully created."
+      flash[:success] = 'Asset successfully created.'
       redirect_to asset_path(@asset)
     else
-      flash[:danger] = "Failed to create "+@asset.product_serial.upcase+"."+@asset.errors.full_messages.to_sentence
+      flash[:danger] = 'Failed to create ' + @asset.product_serial.upcase + '.' + @asset.errors.full_messages.to_sentence
       redirect_to new_asset_path
     end
   end
@@ -50,7 +50,7 @@ class AssetsController < ApplicationController
     @asset_types = AssetType.all
 
     if @asset.update(asset_params)
-      flash[:success] = "Asset successfully updated."
+      flash[:success] = 'Asset successfully updated.'
       redirect_to asset_path(@asset)
     else
       render 'edit'
@@ -61,63 +61,54 @@ class AssetsController < ApplicationController
   def destroy
     @asset = Asset.find(params[:id])
     if @asset.destroy
-      flash[:success] = "Asset removed"
+      flash[:success] = 'Asset removed'
       redirect_to assets_path
     else
-      flash[:danger] = "Failed to remove asset "+@asset.product_serial
-      redirect_to asset_path(@asset) # todo: is this really neaded ?
+      flash[:danger] = 'Failed to remove asset ' + @asset.product_serial
+      redirect_to asset_path(@asset) # TODO: is this really neaded ?
     end
   end
 
   def archive
     if @asset.update(deleted: true)
-      flash[:success] = "Asset archived"
+      flash[:success] = 'Asset archived'
       redirect_to assets_path
     else
-      flash[:danger] = "Failed to archive asset "+@asset.product_serial
-      redirect_to asset_path(@asset) # todo: is this really neaded ?
+      flash[:danger] = 'Failed to archive asset ' + @asset.product_serial
+      redirect_to asset_path(@asset) # TODO: is this really neaded ?
     end
   end
 
   def replace_battery
     if @asset.battery_life
-      @battery_replacement = BatteryReplacement.new(:asset=>@asset, :user=>current_logged_user)
+      @battery_replacement = BatteryReplacement.new(asset: @asset, user: current_logged_user)
       if @battery_replacement.save
-        flash[:success] = "Battery changed successfully."
-        redirect_to asset_path(@asset)
+        flash[:success] = 'Battery changed successfully.'
       else
-        flash[:danger] = "Failed to change the battery"
-        redirect_to asset_path(@asset)
+        flash[:danger] = 'Failed to change the battery'
       end
     else
       flash[:warning] = "This asset has no battery, you can't replace it ;)"
-      redirect_to asset_path(@asset)
     end
+    redirect_to asset_path(@asset)
   end
 
   def get_asset
-    @asset = Asset.find_by(id: params["id"], deleted: false) || Asset.find_by(id: params["asset_id"], deleted: false)
-    if !@asset
-      render_404
-    end
+    @asset = Asset.find_by(id: params['id'], deleted: false) || Asset.find_by(id: params['asset_id'], deleted: false)
+    render_404 unless @asset
   end
 
   def get_asset_type
-    @asset_type = AssetType.find_by(id: asset_params["asset_type_id"])
-    if !@asset_type
-      render_404
-    end
+    @asset_type = AssetType.find_by(id: asset_params['asset_type_id'])
+    render_404 unless @asset_type
   end
 
   def must_be_proprietary
-    self.get_asset
-    if @asset.user != current_logged_user
-      render_403
-    end
+    get_asset
+    render_403 if @asset.user != current_logged_user
   end
 
   def asset_params
     params.require(:asset).permit(:product_serial, :description, :battery_life, :date_purchase, :asset_type_id, :user_id)
   end
-
 end

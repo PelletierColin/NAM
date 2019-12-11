@@ -27,7 +27,7 @@
       <td><%= asset.product_serial %></td>
       <td><%= asset.description %></td>
       <td class="text-center">
-        <% if !asset.has_current_mission %>
+        <% unless asset.has_current_mission %>
         <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
         <% else %>
         <span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Validations
   validates :firstname, :lastname, :mail, :password, :password_confirmation, :salt, presence: true
   validates :password, confirmation: true
-  validates :password, :length => { minimum: 7 }
+  validates :password, length: { minimum: 7 }
   validates :mail, uniqueness: true
 
   # Hooks
@@ -17,14 +17,14 @@ class User < ApplicationRecord
   has_many :missions
 
   def set_lowercase
-    self.firstname = self.firstname.downcase
-    self.lastname = self.lastname.downcase
-    self.mail = self.mail.downcase
+    self.firstname = firstname.downcase
+    self.lastname = lastname.downcase
+    self.mail = mail.downcase
   end
 
   def gen_token_and_salt
-    self.gen_token
-    self.gen_salt
+    gen_token
+    gen_salt
   end
 
   def gen_token
@@ -42,11 +42,11 @@ class User < ApplicationRecord
   end
 
   def encrypt_password(password)
-    return Digest::SHA2.new(512).hexdigest(password+self.salt)
+    return Digest::SHA2.new(512).hexdigest(password + salt)
   end
 
-  def change_password(password=self.password)
-    passwd=self.encrypt_password(password)
+  def change_password(password = self.password)
+    passwd = encrypt_password(password)
     self.password = passwd
     self.password_confirmation = passwd
   end
@@ -57,5 +57,4 @@ class User < ApplicationRecord
     end
     return false
   end
-
 end

@@ -16,7 +16,7 @@ module NAM
     # -- all .rb files in that directory are automatically loaded.
 
     # translation config
-    config.i18n.available_locales = [:fr, :en]
+    config.i18n.available_locales = %i[fr en]
     config.i18n.default_locale = :fr
   end
 end

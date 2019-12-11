@@ -8,13 +8,13 @@
 
 # Add a seed user in development environment only
 if :development
-  @user = User.new({
+  @user = User.new(
     firstname: 'admin',
     lastname: 'admin',
     mail: 'admin@isska.ch',
     password: 'admin12',
     password_confirmation: 'admin12'
-  })
+  )
 
   @user.gen_token_and_salt
   if @user.save

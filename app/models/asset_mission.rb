@@ -16,9 +16,9 @@ class AssetMission < ApplicationRecord
 
   def one_asset_per_mission_at_a_time
     # if self.asset.has_current_mission && self.extracted_at_was != nil
-    if self.asset.get_current_missions.length > 1
-      self.asset.get_current_missions.each do |conflict_mission|
-        errors.add(:base, "Conflict with mission "+conflict_mission.description)
+    if asset.get_current_missions.length > 1
+      asset.get_current_missions.each do |conflict_mission|
+        errors.add(:base, 'Conflict with mission ' + conflict_mission.description)
         break
       end
     end

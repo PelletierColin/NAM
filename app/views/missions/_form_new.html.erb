@@ -20,7 +20,7 @@
 <div class="form-group">
   <%= label_tag 'user', "Owner*", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
-    <%= f.text_field :user, class: 'form-control', value: current_logged_user.firstname.capitalize+" "+current_logged_user.lastname.capitalize,readonly: true %>
+    <%= f.text_field :user, class: 'form-control', value: current_logged_user.firstname.capitalize + " " + current_logged_user.lastname.capitalize,readonly: true %>
   </div>
 </div>
 <div class="form-group">

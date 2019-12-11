@@ -19,7 +19,7 @@
               <p class="text-right">
               v.<small>
                 <% if get_revision.to_s != "unknown 😳" %>
-                <%= link_to get_revision(7), 'https://github.com/ISSKA/NAM/commit/'+get_revision, target: :_blank %>
+                <%= link_to get_revision(7), 'https://github.com/ISSKA/NAM/commit/' + get_revision, target: :_blank %>
                 <% else %>
                 <%= get_revision %>
                 <% end %>

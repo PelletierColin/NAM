@@ -1,0 +1,23 @@
+# Line is too long.
+Layout/LineLength:
+  Enabled: false
+
+# Missing magic comment `# frozen_string_literal: true`.
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Class has too many lines. [102/100]
+Metrics/ClassLength:
+  Enabled: false
+
+# Missing top-level class documentation comment.
+Documentation:
+  Enabled: false
+
+#
+Style/NumericLiterals:
+  Enabled: false
+
+# Redundant `return` detected.
+Style/RedundantReturn:
+  Enabled: false

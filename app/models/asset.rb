@@ -8,10 +8,9 @@ class Asset < ApplicationRecord
   has_many :asset_missions, dependent: :destroy
   has_many :missions, through: :asset_missions
 
-
   ## Return remaining battery hours at NOW
   def get_battery_status
-    last_bat_repl = self.battery_replacements.last
+    last_bat_repl = battery_replacements.last
     if last_bat_repl
       battery_tlived = (DateTime.now.to_i - last_bat_repl.created_at.to_i) / 3600
     else
@@ -42,9 +41,9 @@ class Asset < ApplicationRecord
 
   def get_current_missions
     current_mission = []
-    self.missions.each do |mission|
-      running_asset_missions = self.asset_missions.where(:mission => mission).where(:extracted_at => nil)
-      running_asset_missions += self.asset_missions.where(:mission => mission).where('extracted_at >= ?', DateTime.now)
+    missions.each do |mission|
+      running_asset_missions = asset_missions.where(mission: mission).where(extracted_at: nil)
+      running_asset_missions += asset_missions.where(mission: mission).where('extracted_at >= ?', DateTime.now)
       # if mission.ending_date > DateTime.now && running_asset_missions.count > 0
       if running_asset_missions.count > 0
         current_mission.push(mission)
@@ -53,5 +52,4 @@ class Asset < ApplicationRecord
     current_mission.uniq
     return current_mission
   end
-
 end

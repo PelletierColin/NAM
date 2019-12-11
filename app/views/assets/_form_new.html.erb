@@ -20,7 +20,7 @@
 <div class="form-group">
   <%= label_tag 'user', "Owner*", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
-    <%= text_field_tag 'user_full_name', current_logged_user.firstname.capitalize+" "+current_logged_user.lastname.capitalize, {class: "form-control",disabled: true} %>
+    <%= text_field_tag 'user_full_name', current_logged_user.firstname.capitalize + " " + current_logged_user.lastname.capitalize, { class: "form-control", disabled: true } %>
     <%= f.hidden_field(:user_id, :value => current_logged_user.id) %>
   </div>
 </div>

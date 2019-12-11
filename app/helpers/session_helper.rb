@@ -16,8 +16,6 @@ module SessionHelper
   end
 
   def must_be_logged
-    if !is_logged_in
-      render_403
-    end
+    render_403 unless is_logged_in
   end
 end
