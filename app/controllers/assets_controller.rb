@@ -17,6 +17,9 @@ class AssetsController < ApplicationController
   end
 
   def create
+    add_breadcrumb 'new asset'
+    @asset_types = AssetType.all
+
     @asset = Asset.new(asset_params)
     @asset.user = current_logged_user
     @asset.asset_type = @asset_type
@@ -24,8 +27,7 @@ class AssetsController < ApplicationController
       flash[:success] = 'Asset successfully created.'
       redirect_to asset_path(@asset)
     else
-      flash[:danger] = 'Failed to create ' + @asset.product_serial.upcase + '.' + @asset.errors.full_messages.to_sentence
-      redirect_to new_asset_path
+      render 'new'
     end
   end
 

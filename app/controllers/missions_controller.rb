@@ -16,13 +16,14 @@ class MissionsController < ApplicationController
   end
 
   def create
+    add_breadcrumb 'new mission'
+
     @mission = Mission.new(mission_params)
     @mission.user = current_logged_user
     if @mission.save
       flash[:success] = 'Mission successfully created.'
       redirect_to mission_path(@mission)
     else
-      flash.now[:danger] = 'Failed to create ' + @mission.project_name
       render 'new'
     end
   end

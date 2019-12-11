@@ -19,7 +19,6 @@ class AssetTypesController < ApplicationController
       flash[:success] = 'Asset type successfully created.'
       redirect_to asset_type_path(@asset_type)
     else
-      flash.now[:danger] = 'Failed to create ' + @asset_type.name
       render 'new'
     end
   end
