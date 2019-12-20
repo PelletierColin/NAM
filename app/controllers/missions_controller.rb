@@ -30,14 +30,14 @@ class MissionsController < ApplicationController
 
   def show
     add_breadcrumb @mission.project_name
-    @asset_missions = @mission.asset_missions.order('created_at desc')
+    @asset_missions = @mission.asset_missions.order('placed_at desc')
   end
 
   def edit
     add_breadcrumb @mission.project_name, mission_path(@mission)
     add_breadcrumb 'edit'
 
-    @asset_missions = @mission.asset_missions.order('created_at desc')
+    @asset_missions = @mission.asset_missions.order('placed_at desc')
   end
 
   def update
@@ -81,7 +81,7 @@ class MissionsController < ApplicationController
         asset_mission.mission = @mission
         asset_mission.asset = Asset.find_by(id: asset_id)
         asset_mission.user = current_logged_user
-        asset_mission.created_at = DateTime.now
+        asset_mission.placed_at = DateTime.now
         unless asset_mission.save
           flash[:danger] = 'Error when trying to assign the "' + asset_mission.asset.product_serial + ' ' + asset_mission.asset.description + '" to this mission. ' + asset_mission.errors.full_messages.to_sentence
           break

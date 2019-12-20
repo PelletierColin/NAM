@@ -19,11 +19,31 @@
 <% end %>
 
 <div class="form-group">
-  <%= label_tag 'created_at', "Placed on*", class: 'col-sm-2 col-md-2 control-label' %>
+  <%= label_tag 'placed_at', "Placed on*", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
-    <%= f.date_field :created_at, class: 'form-control'%>
+    <%= f.date_field :placed_at, class: 'form-control'%>
   </div>
 </div>
+
+<div class="form-group">
+  <%= label_tag 'position_x', "Position x", class: 'col-sm-2 col-md-2 control-label' %>
+  <div class="col-sm-10 col-md-10">
+    <%= f.number_field :position_x, class: 'form-control'%>
+  </div>
+</div>
+<div class="form-group">
+  <%= label_tag 'position_y', "Position y", class: 'col-sm-2 col-md-2 control-label' %>
+  <div class="col-sm-10 col-md-10">
+    <%= f.number_field :position_y, class: 'form-control'%>
+  </div>
+</div>
+<div class="form-group">
+  <%= label_tag 'position_z', "Position z", class: 'col-sm-2 col-md-2 control-label' %>
+  <div class="col-sm-10 col-md-10">
+    <%= f.number_field :position_z, class: 'form-control'%>
+  </div>
+</div>
+
 <div class="form-group">
   <%= label_tag 'extracted_at', "Removed on", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
@@ -31,9 +51,9 @@
   </div>
 </div>
 <div class="form-group">
-  <%= label_tag 'placement_indications', "Comment", class: 'col-sm-2 col-md-2 control-label' %>
+  <%= label_tag 'comments', "Comment", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
-    <%= f.text_field :placement_indications, class: 'form-control'%>
+    <%= f.text_field :comments, class: 'form-control'%>
   </div>
 </div>
 

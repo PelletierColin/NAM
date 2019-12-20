@@ -6,6 +6,7 @@
       <th>Description</th>
       <th>Purchase</th>
       <th>Expected lifetime</th>
+      <th>Position</th>
       <th>Placed on</th>
       <th>Removed on</th>
       <th>Comment</th>
@@ -42,7 +43,8 @@
       -
       <% end %>
     </td>
-    <td><%= asset_mission.created_at.strftime("%d.%m.%Y") %></td>
+    <td><%= asset_mission.position_x %> <%= asset_mission.position_y %> <%= asset_mission.position_z %></td>
+    <td><%= asset_mission.placed_at.strftime("%d.%m.%Y") %></td>
     <td>
       <% if asset_mission.extracted_at %>
       <%= asset_mission.extracted_at.strftime("%d.%m.%Y") %>
@@ -50,13 +52,13 @@
       -
       <% end %>
     </td>
-    <td><%= asset_mission.placement_indications %></td>
+    <td><%= asset_mission.comments %></td>
     <td colspan="2">
       <% disabled = "" %>
       <% if asset_mission.extracted_at != nil %>
       <% disabled = "disabled " %>
       <% end %>
-      <%= link_to 'show asset', asset_path(asset), class: "btn btn-primary btn-xs" %>
+      <%= link_to 'show', asset_path(asset), class: "btn btn-primary btn-xs" %>
       <% if is_logged_in %>
         <%= link_to 'upload data', asset_path(asset), class: "disabled btn btn-primary btn-xs" %>
         <%= link_to 'battery replaced', asset_replace_battery_path(asset),method: :post, class: "btn btn-primary btn-xs" %>

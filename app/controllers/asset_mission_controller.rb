@@ -29,6 +29,6 @@ class AssetMissionController < ApplicationController
   end
 
   def asset_mission_params
-    params.require(:asset_mission).permit(:placement_indications, :created_at, :extracted_at)
+    params.require(:asset_mission).permit(:comments, :placed_at, :extracted_at, :position_x, :position_y, :position_z)
   end
 end
